@@ -3,27 +3,51 @@ import { Container, Form } from './styles'
 import { Logo } from '../../components/Logo'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
+import { Toast } from '../../components/Toast'
 import { api } from '../../services/api'
 
 export function SignUp() {
+  // states to handle the user creation
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  // states to handle the toast
+  const [openToast, setOpenToast] = useState(false)
+  const [toastTitle, setToastTitle] = useState('')
+  const [toastDescription, setToastDescription] = useState('')
 
+  // function to handle the user creation
   async function handleCreateAccount(e) {
     e.preventDefault()
+    // for each time that the user clicks on the button, close the toast state
+    setOpenToast(false)
 
+    // check if the user password has at least 6 characters
     if (password.length < 6) {
-      return alert('A senha deve ter no mínimo 6 caracteres')
+      setToastTitle('Error')
+      setToastDescription('A senha deve ter no mínimo 6 caracteres')
+      setOpenToast(true)
+      return
     }
 
-    await api.post('/users', {
-      name,
-      email,
-      password,
-    })
-
-    alert('Conta criada com sucesso')
+    // create the user and show the toast with the response
+    await api
+      .post('/users', {
+        name,
+        email,
+        password,
+      })
+      .then((response) => {
+        setToastTitle(response.data.status)
+        setToastDescription(response.data.message)
+        setOpenToast(true)
+      })
+      .catch((error) => {
+        console.log(error)
+        setToastTitle(error.response.data.status)
+        setToastDescription(error.response.data.message)
+        setOpenToast(true)
+      })
   }
 
   return (
@@ -31,7 +55,7 @@ export function SignUp() {
       <Logo />
 
       <Form>
-        <h2>Faça login</h2>
+        <h2>Crie sua conta</h2>
 
         <Input
           label="Seu nome"
@@ -54,8 +78,15 @@ export function SignUp() {
 
         <Button
           title="Criar conta"
-          disabled={name === '' || email === '' || password === ''}
+          // disabled={name === '' || email === '' || password === ''}
           onClick={(e) => handleCreateAccount(e)}
+        />
+
+        <Toast
+          label="Criar conta"
+          title={toastTitle}
+          description={toastDescription}
+          openToast={openToast}
         />
 
         <a href="/register">Já tenho uma conta</a>
