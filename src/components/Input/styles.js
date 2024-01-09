@@ -21,6 +21,7 @@ export const Wrapper = styled.div`
 
   background-color: ${({ theme }) => theme.colors.dark_900};
   color: ${({ theme }) => theme.colors.light_500};
+
   input {
     width: 100%;
     height: 100%;
@@ -28,7 +29,7 @@ export const Wrapper = styled.div`
     border: none;
     outline: none;
     font-size: 1.6rem;
-    color: ${({ theme }) => theme.colors.light_500};
+    color: ${({ theme }) => theme.colors.light_400};
   }
 
   svg {

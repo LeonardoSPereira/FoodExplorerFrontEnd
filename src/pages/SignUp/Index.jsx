@@ -11,24 +11,21 @@ export function SignUp() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
   // states to handle the toast
   const [openToast, setOpenToast] = useState(false)
   const [toastTitle, setToastTitle] = useState('')
   const [toastDescription, setToastDescription] = useState('')
 
+  // variable to check if the password is empty or less than 6 characters
+  const passwordFormat = password === '' || password.length < 6
+
   // function to handle the user creation
   async function handleCreateAccount(e) {
     e.preventDefault()
+
     // for each time that the user clicks on the button, close the toast state
     setOpenToast(false)
-
-    // check if the user password has at least 6 characters
-    if (password.length < 6) {
-      setToastTitle('Error')
-      setToastDescription('A senha deve ter no mínimo 6 caracteres')
-      setOpenToast(true)
-      return
-    }
 
     // create the user and show the toast with the response
     await api
@@ -52,6 +49,13 @@ export function SignUp() {
 
   return (
     <Container>
+      <Toast
+        label="Criar conta"
+        title={toastTitle}
+        description={toastDescription}
+        openToast={openToast}
+      />
+
       <Logo />
 
       <Form>
@@ -65,6 +69,7 @@ export function SignUp() {
 
         <Input
           label="Email"
+          type="email"
           placeholder="exemplo@exemplo.com.br"
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -78,15 +83,8 @@ export function SignUp() {
 
         <Button
           title="Criar conta"
-          // disabled={name === '' || email === '' || password === ''}
+          //disabled={name === '' || email === '' || passwordFormat}
           onClick={(e) => handleCreateAccount(e)}
-        />
-
-        <Toast
-          label="Criar conta"
-          title={toastTitle}
-          description={toastDescription}
-          openToast={openToast}
         />
 
         <a href="/register">Já tenho uma conta</a>

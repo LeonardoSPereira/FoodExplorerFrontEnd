@@ -72,16 +72,31 @@ export const StyledToastRoot = styled(Toast.Root)`
 `
 
 export const StyledTitle = styled(Toast.Title)`
+  display: flex;
+  align-items: center;
   font-size: 2rem;
   font-weight: 500;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   color: ${({ theme }) => theme.colors.light_100};
+
+  .success {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 0.5rem;
+    color: ${({ theme }) => theme.colors.mint};
+  }
+
+  .error {
+    width: 3.5rem;
+    height: 3.5rem;
+    color: ${({ theme }) => theme.colors.tomato_200};
+  }
 `
 
 export const StyledDescription = styled(Toast.Description)`
   font-size: 1.6rem;
   margin: 0;
-  color: ${({ theme }) => theme.colors.light_500};
+  color: ${({ theme }) => theme.colors.light_400};
 `
 
 export const StyledClose = styled(Toast.Close)`
