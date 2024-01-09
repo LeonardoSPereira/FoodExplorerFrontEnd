@@ -1,4 +1,4 @@
-import { styled } from 'styled-components'
+import { styled, keyframes } from 'styled-components'
 
 export const Container = styled.div`
   width: 100%;
@@ -18,6 +18,17 @@ export const Container = styled.div`
     padding-inline: 10.8rem;
   }
 `
+const InitialAnimation = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+`
 
 export const Form = styled.form`
   width: 100%;
@@ -26,6 +37,7 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   gap: 4.2rem;
+  animation: ${InitialAnimation} 0.5s ease-in-out;
 
   h2 {
     font-family: Poppins;
