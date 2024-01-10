@@ -4,7 +4,7 @@ import { Logo } from '../../components/Logo'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { Toast } from '../../components/Toast'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
 
 export function SignUp() {
@@ -20,6 +20,16 @@ export function SignUp() {
 
   // variable to check if the password is empty or less than 6 characters
   const passwordFormat = password === '' || password.length < 6
+
+  // variable to navigate between pages
+  const navigate = useNavigate()
+
+  // function to navigate to the home page after 2 seconds
+  function navigateToHomeAfterDelay() {
+    setTimeout(() => {
+      navigate('/')
+    }, 2000)
+  }
 
   // function to handle the user creation
   async function handleCreateAccount(e) {
@@ -39,6 +49,8 @@ export function SignUp() {
         setToastTitle(response.data.status)
         setToastDescription(response.data.message)
         setOpenToast(true)
+
+        navigateToHomeAfterDelay()
       })
       .catch((error) => {
         console.log(error)

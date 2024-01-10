@@ -9,7 +9,7 @@ import {
   StyledToastRoot,
 } from './styles'
 
-export function Toast({ title, openToast, description }) {
+export function Toast({ label, title, openToast, description }) {
   const [open, setOpen] = useState(openToast)
 
   // function to close the toast
@@ -17,6 +17,7 @@ export function Toast({ title, openToast, description }) {
     setOpen(false)
   }
 
+  // function to close the toast after 3 seconds
   function closeToastAfterDelay() {
     setTimeout(() => {
       setOpen(false)
@@ -33,7 +34,7 @@ export function Toast({ title, openToast, description }) {
   }, [openToast])
 
   return (
-    <ToastPrimitive.Provider swipeDirection="right" duration={2000}>
+    <ToastPrimitive.Provider label={label}>
       {/* if the toast is open, then render the toast */}
       <StyledToastRoot open={open}>
         {

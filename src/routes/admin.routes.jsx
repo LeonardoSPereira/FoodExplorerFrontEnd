@@ -9,7 +9,8 @@ import { Order } from '../pages/Order'
 import { Orders } from '../pages/Orders'
 import { NotFound } from '../pages/NotFound'
 
-export function AppRoutes() {
+// create the admin routes
+export function AdminRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -20,6 +21,7 @@ export function AppRoutes() {
       <Route path="/order" element={<Order />} />
       <Route path="/orders" element={<Orders />} />
 
+      {/* if the user tries to access a route that doesn't exist, redirect to the not found page */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
