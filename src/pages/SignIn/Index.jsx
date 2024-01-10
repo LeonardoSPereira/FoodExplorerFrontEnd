@@ -3,6 +3,7 @@ import { Container, Form } from './styles'
 import { Logo } from '../../components/Logo'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
+import { Link } from 'react-router-dom'
 
 export function SignIn() {
   const [email, setEmail] = useState('')
@@ -33,7 +34,7 @@ export function SignIn() {
 
         <Button title="Entrar" disabled={email === '' || password === ''} />
 
-        <a href="/register">Criar conta</a>
+        <Link to="/register">Criar conta</Link>
       </Form>
     </Container>
   )

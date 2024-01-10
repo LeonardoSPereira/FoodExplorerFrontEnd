@@ -4,6 +4,7 @@ import { Logo } from '../../components/Logo'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { Toast } from '../../components/Toast'
+import { Link } from 'react-router-dom'
 import { api } from '../../services/api'
 
 export function SignUp() {
@@ -83,11 +84,11 @@ export function SignUp() {
 
         <Button
           title="Criar conta"
-          //disabled={name === '' || email === '' || passwordFormat}
+          disabled={name === '' || email === '' || passwordFormat}
           onClick={(e) => handleCreateAccount(e)}
         />
 
-        <a href="/register">Já tenho uma conta</a>
+        <Link to={-1}>Já tenho uma conta</Link>
       </Form>
     </Container>
   )
