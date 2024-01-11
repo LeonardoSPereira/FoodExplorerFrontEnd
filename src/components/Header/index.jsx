@@ -6,6 +6,7 @@ import { PiReceipt } from 'react-icons/pi'
 import { IoIosMenu, IoMdClose, IoIosSearch } from 'react-icons/io'
 import { Input } from '../Input'
 import { ItemMenu } from '../ItemMenu'
+import { Footer } from '../Footer'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 
@@ -56,6 +57,8 @@ export function Header() {
             placeholder="Busque por pratos ou ingredientes"
           />
 
+          <ItemMenu title="Home" onClick={() => navigate('/')} />
+
           {user.isAdmin ? (
             <ItemMenu title="Novo Prato" onClick={() => navigate('/new')} />
           ) : (
@@ -67,6 +70,8 @@ export function Header() {
 
           <ItemMenu title="Sair" onClick={handleSignOut} />
         </Wrapper>
+
+        <Footer />
       </SideMenu>
     </Container>
   )
