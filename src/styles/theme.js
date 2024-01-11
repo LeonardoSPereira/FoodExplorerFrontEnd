@@ -30,4 +30,9 @@ export default {
     cake_100: '#065E7C',
     cake_200: '#82F3FF',
   },
+
+  gradients: {
+    gradient_100: 'linear-gradient(90deg, #000a0f45 0%, #000A0F 100%)',
+    gradient_200: 'linear-gradient(180deg, #091E26 0%, #00131C 100%)',
+  },
 }

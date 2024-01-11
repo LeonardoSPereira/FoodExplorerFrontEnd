@@ -6,9 +6,11 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 2.8rem;
+  margin-bottom: 4.4rem;
   background-color: ${({ theme }) => theme.colors.dark_700};
 
   @media (min-width: 768px) {
+    margin-bottom: 16.4rem;
   }
 `
 
@@ -102,7 +104,7 @@ export const Wrapper = styled.div`
 export const DesktopMenu = styled.header`
   width: 100%;
   height: 10.4rem;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: space-between;
   gap: 3.2rem;
@@ -119,7 +121,7 @@ export const DesktopMenu = styled.header`
     max-width: 22rem;
   }
 
-  @media (max-width: 768px) {
-    display: none;
+  @media (min-width: 768px) {
+    display: flex;
   }
 `
