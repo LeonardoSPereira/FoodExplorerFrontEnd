@@ -9,7 +9,7 @@ import {
   StyledTitle,
 } from './styles'
 
-export function Dialog({ title, content, children, ...rest }) {
+export function Dialog({ title, content, children }) {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger asChild>{children}</AlertDialog.Trigger>

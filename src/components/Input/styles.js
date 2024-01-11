@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
 
 export const Container = styled.div`
+  width: 100%;
   height: 4.8rem;
   display: flex;
   flex-direction: column;
@@ -18,7 +19,6 @@ export const Wrapper = styled.div`
   gap: 1.4rem;
   padding: 1.2rem 1.4rem;
   border-radius: 0.8rem;
-
   background-color: ${({ theme }) => theme.colors.dark_900};
   color: ${({ theme }) => theme.colors.light_500};
 

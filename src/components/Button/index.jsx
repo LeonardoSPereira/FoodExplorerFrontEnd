@@ -1,10 +1,11 @@
 import { Container } from './styles'
 
-export function Button({ icon: Icon, title, ...rest }) {
+export function Button({ icon: Icon, title, items, ...rest }) {
   return (
     <Container {...rest}>
-      {Icon && <Icon />} {/* if Icon exists, render it */}
+      {Icon && <Icon />}
       <h1>{title}</h1>
+      {items && <p>{items}</p>}
     </Container>
   )
 }
