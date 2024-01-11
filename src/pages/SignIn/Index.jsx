@@ -22,7 +22,6 @@ export function SignIn() {
     setOpenToast(false)
 
     const response = await signIn({ email, password })
-    console.log('response: ', response)
 
     setToastTitle(response.status)
     setToastDescription(response.message)

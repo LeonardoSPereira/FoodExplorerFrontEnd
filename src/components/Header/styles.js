@@ -10,7 +10,7 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.dark_700};
 `
 
-export const MenuMobile = styled.div`
+export const MenuMobile = styled.header`
   width: 100%;
   display: flex;
   align-items: center;
@@ -21,10 +21,13 @@ export const MenuMobile = styled.div`
   }
 `
 
-export const Menu = styled.button`
+export const Button = styled.button`
   width: 2.4rem;
   height: 1.8rem;
   background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   position: relative;
 
@@ -51,4 +54,42 @@ export const Menu = styled.button`
     font-weight: 500;
     line-height: 2.4rem;
   }
+`
+
+export const SideMenu = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+  transform: ${({ $isOpen }) =>
+    $isOpen ? 'translateX(0)' : 'translateX(-100%)'};
+  transition: transform 0.2s ease-in-out;
+
+  header {
+    width: 100%;
+    height: 10.4rem;
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    padding: 4.8rem 2.8rem;
+    background-color: ${({ theme }) => theme.colors.dark_700};
+
+    p {
+      font-size: 2.2rem;
+    }
+  }
+`
+
+export const Wrapper = styled.div`
+  width: 100%;
+  height: calc(100vh - 10.4rem);
+  padding: 3.6rem 2.8rem 1.4rem;
+  background-color: ${({ theme }) => theme.colors.dark_400};
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `
