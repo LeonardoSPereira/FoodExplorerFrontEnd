@@ -5,6 +5,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
+
 `
 
 export const Banner = styled.div`
@@ -78,13 +79,13 @@ export const Banner = styled.div`
   }
 
   @media (min-width: 425px) {
-    height: 16rem;
+    height: 12rem;
     margin: 0 2rem;
     gap: 2rem;
 
     img {
-      width: 32rem;
-      height: 18rem;
+      width: 20rem;
+      height: 14rem;
       margin-top: -2rem;
     }
   }
