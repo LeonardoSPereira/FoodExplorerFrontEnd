@@ -4,8 +4,8 @@ import { PiPencilSimpleLight } from 'react-icons/pi'
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { Toast } from '../Toast'
 import { Button } from '../Button'
-import { Container, ButtonMenu, Price, Stepper } from './styles'
-import { useNavigate } from 'react-router-dom'
+import { Container, ButtonMenu, Price, Stepper, Wrapper } from './styles'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 
 export function Product({ product }) {
@@ -23,6 +23,8 @@ export function Product({ product }) {
   const [toastDescription, setToastDescription] = useState('')
 
   const navigate = useNavigate()
+  const productPath = `/product/${product.id}`
+  const editPath = `/edit/${product.id}`
 
   // function to add the product to favorites and show the toast
   function handleAddFavorite() {
@@ -51,6 +53,7 @@ export function Product({ product }) {
 
   return (
     <Container>
+      {/* render the toast */}
       {openToast && (
         <Toast
           title={toastTitle}
@@ -61,7 +64,7 @@ export function Product({ product }) {
 
       {/* check if user is admin and render the edit button. If not render the favorite button based if the product is favorite or not */}
       {user.isAdmin ? (
-        <ButtonMenu onClick={() => navigate('/edit')}>
+        <ButtonMenu onClick={() => navigate(editPath)}>
           <PiPencilSimpleLight />
         </ButtonMenu>
       ) : (
@@ -75,30 +78,44 @@ export function Product({ product }) {
       )}
 
       <img src={product.image} alt={product.name} />
-      <h3>
+
+      {/* render the name of the product */}
+      <Link to={productPath}>
         {product.name}
         <MdKeyboardArrowRight />
-      </h3>
+      </Link>
+
       <p>{product.description}</p>
+
+      {/* render the price of the product */}
       <Price>
         <span>R$ </span>
         <span>{String(product.price / 100).replace('.', ',')}</span>
       </Price>
 
-      {/* stepper to control the quantity of the product */}
-      {!user.isAdmin && (
-        <Stepper>
-          <button onClick={() => setStepperValue((prevState) => prevState - 1)}>
-            <IoMdRemove />
-          </button>
-          <span>{String(stepperValue).padStart(2, '0')}</span>
-          <button onClick={() => setStepperValue((prevState) => prevState + 1)}>
-            <IoMdAdd />
-          </button>
-        </Stepper>
-      )}
+      <Wrapper>
+        {/* stepper to control the quantity of the product */}
+        {!user.isAdmin && (
+          <Stepper>
+            <button
+              onClick={() => setStepperValue((prevState) => prevState - 1)}
+            >
+              <IoMdRemove />
+            </button>
 
-      {!user.isAdmin && <Button title="Incluir" />}
+            <span>{String(stepperValue).padStart(2, '0')}</span>
+
+            <button
+              onClick={() => setStepperValue((prevState) => prevState + 1)}
+            >
+              <IoMdAdd />
+            </button>
+          </Stepper>
+        )}
+
+        {/* button to add the product to the cart */}
+        {!user.isAdmin && <Button title="Incluir" />}
+      </Wrapper>
     </Container>
   )
 }

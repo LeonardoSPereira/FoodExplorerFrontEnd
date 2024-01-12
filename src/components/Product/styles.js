@@ -1,8 +1,8 @@
 import { styled } from 'styled-components'
 
 export const Container = styled.div`
-  width: 22rem;
-  height: 30rem;
+  max-width: 22rem;
+  max-height: 30rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,11 +20,11 @@ export const Container = styled.div`
     height: 8.8rem;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
+    object-fit: cover;
     border-radius: 9999px;
   }
 
-  h3 {
+  a {
     display: flex;
     align-items: center;
     font-family: Poppins;
@@ -38,8 +38,27 @@ export const Container = styled.div`
       width: 1.4rem;
       height: 1.4rem;
     }
+  }
 
-    @media (min-width: 768px) {
+  p {
+    display: none;
+    font-size: 1.4rem;
+    line-height: 160%;
+    text-align: center;
+    color: ${({ theme }) => theme.colors.light_400};
+  }
+
+  @media (min-width: 768px) {
+    max-width: 30rem;
+    max-height: 46rem;
+    gap: 1.5rem;
+
+    img {
+      width: 18rem;
+      height: 18rem;
+    }
+
+    a {
       font-size: 2.4rem;
       font-weight: 700;
       line-height: 140%;
@@ -50,18 +69,8 @@ export const Container = styled.div`
         font-size: 2.4rem;
       }
     }
-  }
 
-  p {
-    display: none;
-    font-family: Roboto;
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 160%;
-    text-align: center;
-    color: ${({ theme }) => theme.colors.light_400};
-
-    @media (min-width: 768px) {
+    p {
       display: block;
     }
   }
@@ -76,6 +85,12 @@ export const Price = styled.div`
     font-size: 1.6rem;
     text-align: center;
     color: ${({ theme }) => theme.colors.cake_200};
+  }
+
+  @media (min-width: 768px) {
+    span {
+      font-size: 3.2rem;
+    }
   }
 `
 
@@ -101,6 +116,24 @@ export const Stepper = styled.div`
   span {
     font-size: 1.6rem;
     color: ${({ theme }) => theme.colors.light_300};
+  }
+
+  @media (min-width: 768px) {
+    span {
+      font-size: 2rem;
+    }
+  }
+`
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
   }
 `
 

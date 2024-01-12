@@ -9,11 +9,11 @@ export function Home() {
   console.log(search)
 
   const product = {
-    name: 'Pizza de Calabresa',
+    id: 1,
+    name: 'Spaguetti Gambe',
     price: 2947,
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quibusdam.',
-    image: 'https://source.unsplash.com/random',
+    description: 'Massa fresca com camarões e pesto. ',
+    image: 'https://github.com/leonardospereira.png',
   }
 
   return (
