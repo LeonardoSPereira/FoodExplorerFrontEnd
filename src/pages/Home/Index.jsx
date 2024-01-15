@@ -2,7 +2,8 @@ import { useState } from 'react'
 import BannerImg from '../../../assets/BannerImg.svg'
 import { Header } from '../../components/Header'
 import { Product } from '../../components/Product'
-import { Container, Banner } from './styles'
+import { Session } from '../../components/Session'
+import { Container, Banner, Wrapper } from './styles'
 
 export function Home() {
   const [search, setSearch] = useState('')
@@ -27,7 +28,24 @@ export function Home() {
         </div>
       </Banner>
 
-      <Product product={product} />
+      <Wrapper>
+        <Session title="Refeições">
+          <Product product={product} />
+          <Product product={product} />
+          <Product product={product} />
+          <Product product={product} />
+          <Product product={product} />
+          <Product product={product} />
+          <Product product={product} />
+          <Product product={product} />
+          <Product product={product} />
+          <Product product={product} />
+          <Product product={product} />
+          <Product product={product} />
+          <Product product={product} />
+          <Product product={product} />
+        </Session>
+      </Wrapper>
     </Container>
   )
 }

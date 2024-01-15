@@ -52,7 +52,7 @@ export function Product({ product }) {
   }, [isFavorite])
 
   return (
-    <Container>
+    <Container className="keen-slider__slide">
       {/* render the toast */}
       {openToast && (
         <Toast

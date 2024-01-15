@@ -131,3 +131,17 @@ export const Banner = styled.div`
     }
   }
 `
+export const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.4rem;
+  padding-inline: 2.4rem;
+  margin-top: 6.2rem;
+
+  @media (min-width: 768px) {
+    gap: 4.8rem;
+    padding-inline: 8rem;
+  }
+`
