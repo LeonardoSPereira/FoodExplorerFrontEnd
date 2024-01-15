@@ -8,13 +8,13 @@ export function Slider({ children }) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
   const [sliderRef, instanceRef] = useKeenSlider({
-    initial: 0,
+    initial: 1,
+    loop: true,
     slides: {
       perView: 'auto',
       spacing: 5,
     },
     renderMode: 'performance',
-    loop: true,
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel)
     },
@@ -22,10 +22,11 @@ export function Slider({ children }) {
       setLoaded(true)
     },
   })
+
   return (
     <Container>
       <Wrapper ref={sliderRef}>{children}</Wrapper>
-      {loaded && instanceRef.current && (
+      {loaded && instanceRef.current && children.length > 3 && (
         <>
           <Arrow
             left

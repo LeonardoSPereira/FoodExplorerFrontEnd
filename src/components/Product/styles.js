@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 
 export const Container = styled.div`
-  max-width: 22rem;
+  width: 22rem;
   max-height: 30rem;
   display: flex;
   flex-direction: column;
@@ -49,7 +49,7 @@ export const Container = styled.div`
   }
 
   @media (min-width: 768px) {
-    max-width: 30rem;
+    width: 30rem;
     max-height: 46rem;
     gap: 1.5rem;
 

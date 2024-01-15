@@ -7,12 +7,14 @@ import { Button } from '../Button'
 import { Container, ButtonMenu, Price, Stepper, Wrapper } from './styles'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
+import { api } from '../../services/api'
 
 export function Product({ product }) {
   const { user } = useAuth()
 
   // state to control if the product is favorite or not
   const [isFavorite, setIsFavorite] = useState(false)
+  const [favorites, setFavorites] = useState([])
 
   // state to control the stepper value
   const [stepperValue, setStepperValue] = useState(1)
@@ -25,6 +27,9 @@ export function Product({ product }) {
   const navigate = useNavigate()
   const productPath = `/product/${product.id}`
   const editPath = `/edit/${product.id}`
+
+  // const to create a url to the product image
+  const imageURL = `${api.defaults.baseURL}/files/${product.image}`
 
   // function to add the product to favorites and show the toast
   function handleAddFavorite() {
@@ -44,6 +49,20 @@ export function Product({ product }) {
     setOpenToast(true)
   }
 
+  useEffect(() => {
+    async function getFavorites() {
+      const response = await api.get(`/favorites`)
+      setFavorites(response.data)
+
+      // check if the product is favorite
+      const favorite = response.data.find((item) => item.id === product.id)
+      if (favorite) {
+        setIsFavorite(true)
+      }
+    }
+    getFavorites()
+  })
+
   // useEffect to close the toast after 2 seconds
   useEffect(() => {
     setTimeout(() => {
@@ -52,7 +71,7 @@ export function Product({ product }) {
   }, [isFavorite])
 
   return (
-    <Container className="keen-slider__slide">
+    <>
       {/* render the toast */}
       {openToast && (
         <Toast
@@ -62,60 +81,62 @@ export function Product({ product }) {
         />
       )}
 
-      {/* check if user is admin and render the edit button. If not render the favorite button based if the product is favorite or not */}
-      {user.isAdmin ? (
-        <ButtonMenu onClick={() => navigate(editPath)}>
-          <PiPencilSimpleLight />
-        </ButtonMenu>
-      ) : (
-        <ButtonMenu>
-          {isFavorite ? (
-            <IoMdHeart onClick={handleRemoveFavorite} />
-          ) : (
-            <IoMdHeartEmpty onClick={handleAddFavorite} />
-          )}
-        </ButtonMenu>
-      )}
-
-      <img src={product.image} alt={product.name} />
-
-      {/* render the name of the product */}
-      <Link to={productPath}>
-        {product.name}
-        <MdKeyboardArrowRight />
-      </Link>
-
-      <p>{product.description}</p>
-
-      {/* render the price of the product */}
-      <Price>
-        <span>R$ </span>
-        <span>{String(product.price / 100).replace('.', ',')}</span>
-      </Price>
-
-      <Wrapper>
-        {/* stepper to control the quantity of the product */}
-        {!user.isAdmin && (
-          <Stepper>
-            <button
-              onClick={() => setStepperValue((prevState) => prevState - 1)}
-            >
-              <IoMdRemove />
-            </button>
-
-            <span>{String(stepperValue).padStart(2, '0')}</span>
-
-            <button
-              onClick={() => setStepperValue((prevState) => prevState + 1)}
-            >
-              <IoMdAdd />
-            </button>
-          </Stepper>
+      <Container className="keen-slider__slide">
+        {/* check if user is admin and render the edit button. If not render the favorite button based if the product is favorite or not */}
+        {user.isAdmin ? (
+          <ButtonMenu onClick={() => navigate(editPath)}>
+            <PiPencilSimpleLight />
+          </ButtonMenu>
+        ) : (
+          <ButtonMenu>
+            {isFavorite ? (
+              <IoMdHeart onClick={handleRemoveFavorite} />
+            ) : (
+              <IoMdHeartEmpty onClick={handleAddFavorite} />
+            )}
+          </ButtonMenu>
         )}
 
-        {/* button to add the product to the cart */}
-        {!user.isAdmin && <Button title="Incluir" />}
-      </Wrapper>
-    </Container>
+        <img src={imageURL} alt={product.title} />
+
+        {/* render the name of the product */}
+        <Link to={productPath}>
+          {product.title}
+          <MdKeyboardArrowRight />
+        </Link>
+
+        <p>{product.description}</p>
+
+        {/* render the price of the product */}
+        <Price>
+          <span>R$ </span>
+          <span>{String(product.price_in_cents / 100).replace('.', ',')}</span>
+        </Price>
+
+        <Wrapper>
+          {/* stepper to control the quantity of the product */}
+          {!user.isAdmin && (
+            <Stepper>
+              <button
+                onClick={() => setStepperValue((prevState) => prevState - 1)}
+              >
+                <IoMdRemove />
+              </button>
+
+              <span>{String(stepperValue).padStart(2, '0')}</span>
+
+              <button
+                onClick={() => setStepperValue((prevState) => prevState + 1)}
+              >
+                <IoMdAdd />
+              </button>
+            </Stepper>
+          )}
+
+          {/* button to add the product to the cart */}
+          {!user.isAdmin && <Button title="Incluir" />}
+        </Wrapper>
+      </Container>
+    </>
   )
 }
