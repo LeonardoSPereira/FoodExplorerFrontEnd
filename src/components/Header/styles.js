@@ -1,12 +1,13 @@
 import { styled } from 'styled-components'
 
 export const Container = styled.div`
+  width: 100%;
   height: 10.4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 2.8rem;
-  margin-bottom: 4.4rem;
+
   background-color: ${({ theme }) => theme.colors.dark_700};
 
   @media (min-width: 768px) {
