@@ -39,7 +39,7 @@ export function Home() {
   }, [user.name])
 
   return (
-    <Container>
+    <>
       {openToast && (
         <Toast
           title={toastTitle}
@@ -48,57 +48,59 @@ export function Home() {
         />
       )}
 
-      <Header onChange={setSearch} />
-      {search === '' && (
-        <Banner>
-          <img src={BannerImg} alt="Imagem do banner" />
-          <div>
-            <h2>Sabores inigualáveis</h2>
-            <p>Sinta o cuidado do preparo com ingredientes selecionados.</p>
-          </div>
-        </Banner>
-      )}
-
-      <Wrapper>
-        {/* render the session only if there is any product with the following category. And for each product render the product component */}
-        {products.filter((product) => product.category === 'food').length >
-          0 && (
-          <Session title="Refeições">
-            {products.map(
-              (product) =>
-                product.category === 'food' && (
-                  <Product key={product.id} product={product} />
-                ),
-            )}
-          </Session>
+      <Container>
+        <Header onChange={setSearch} />
+        {search === '' && (
+          <Banner>
+            <img src={BannerImg} alt="Imagem do banner" />
+            <div>
+              <h2>Sabores inigualáveis</h2>
+              <p>Sinta o cuidado do preparo com ingredientes selecionados.</p>
+            </div>
+          </Banner>
         )}
 
-        {products.filter((product) => product.category === 'dessert').length >
-          0 && (
-          <Session title="Sobremesas">
-            {products.map(
-              (product) =>
-                product.category === 'dessert' && (
-                  <Product key={product.id} product={product} />
-                ),
-            )}
-          </Session>
-        )}
+        <Wrapper>
+          {/* render the session only if there is any product with the following category. And for each product render the product component */}
+          {products.filter((product) => product.category === 'food').length >
+            0 && (
+            <Session title="Refeições">
+              {products.map(
+                (product) =>
+                  product.category === 'food' && (
+                    <Product key={product.id} product={product} />
+                  ),
+              )}
+            </Session>
+          )}
 
-        {products.filter((product) => product.category === 'drink').length >
-          0 && (
-          <Session title="Bebidas">
-            {products.map(
-              (product) =>
-                product.category === 'drink' && (
-                  <Product key={product.id} product={product} />
-                ),
-            )}
-          </Session>
-        )}
-      </Wrapper>
+          {products.filter((product) => product.category === 'dessert').length >
+            0 && (
+            <Session title="Sobremesas">
+              {products.map(
+                (product) =>
+                  product.category === 'dessert' && (
+                    <Product key={product.id} product={product} />
+                  ),
+              )}
+            </Session>
+          )}
 
-      <Footer />
-    </Container>
+          {products.filter((product) => product.category === 'drink').length >
+            0 && (
+            <Session title="Bebidas">
+              {products.map(
+                (product) =>
+                  product.category === 'drink' && (
+                    <Product key={product.id} product={product} />
+                  ),
+              )}
+            </Session>
+          )}
+        </Wrapper>
+
+        <Footer />
+      </Container>
+    </>
   )
 }

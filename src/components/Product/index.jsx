@@ -12,6 +12,8 @@ import { api } from '../../services/api'
 export function Product({ product }) {
   const { user } = useAuth()
 
+  const navigate = useNavigate()
+
   // state to control if the product is favorite or not
   const [isFavorite, setIsFavorite] = useState(false)
   const [favorites, setFavorites] = useState([])
@@ -24,7 +26,6 @@ export function Product({ product }) {
   const [toastTitle, setToastTitle] = useState('')
   const [toastDescription, setToastDescription] = useState('')
 
-  const navigate = useNavigate()
   const productPath = `/product/${product.id}`
   const editPath = `/edit/${product.id}`
 
@@ -32,30 +33,55 @@ export function Product({ product }) {
   const imageURL = `${api.defaults.baseURL}/files/${product.image}`
 
   // function to add the product to favorites and show the toast
-  function handleAddFavorite() {
+  async function handleAddFavorite() {
     setOpenToast(false)
-    setIsFavorite(true)
-    setToastTitle('Success')
-    setToastDescription('Produto adicionado aos favoritos com sucesso!')
-    setOpenToast(true)
+
+    // create the favorite
+    try {
+      const response = await api.post(`/favorites/${product.id}`)
+      setIsFavorite(true)
+
+      setToastTitle(response.data.status)
+      setToastDescription(response.data.message)
+      setOpenToast(true)
+    } catch (error) {
+      console.log(error)
+
+      setToastTitle(error.response.data.status)
+      setToastDescription(error.response.data.message)
+      setOpenToast(true)
+    }
   }
 
   // function to remove the product from favorites and show the toast
-  function handleRemoveFavorite() {
+  async function handleRemoveFavorite() {
     setOpenToast(false)
-    setIsFavorite(false)
-    setToastTitle('Success')
-    setToastDescription('Produto removido aos favoritos com sucesso!')
-    setOpenToast(true)
+
+    // remove the favorite
+    try {
+      const response = await api.delete(`/favorites/${product.id}`)
+      setIsFavorite(false)
+
+      setToastTitle(response.data.status)
+      setToastDescription(response.data.message)
+      setOpenToast(true)
+    } catch (error) {
+      console.error(error)
+
+      setToastTitle(error.response.data.status)
+      setToastDescription(error.response.data.message)
+      setOpenToast(true)
+    }
   }
 
+  // useEffect to get the favorites from the api
   useEffect(() => {
     async function getFavorites() {
       const response = await api.get(`/favorites`)
       setFavorites(response.data)
 
       // check if the product is favorite
-      const favorite = response.data.find((item) => item.id === product.id)
+      const favorite = favorites.find((item) => item.id === product.id)
       if (favorite) {
         setIsFavorite(true)
       }
