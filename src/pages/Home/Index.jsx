@@ -27,16 +27,12 @@ export function Home() {
     getProducts()
   }, [search])
 
+  // to close the toast after 2 seconds
   useEffect(() => {
-    setOpenToast(false)
-    setToastTitle('Success')
-    setToastDescription(`Login efetuado com sucesso! Bem-vindo ${user.name}!`)
-    setOpenToast(true)
-    // to close the toast after 2 seconds
     setTimeout(() => {
       setOpenToast(false)
     }, 2000)
-  }, [user.name])
+  })
 
   return (
     <>
@@ -60,8 +56,8 @@ export function Home() {
           </Banner>
         )}
 
+        {/* render the session only if there is any product with the following category. And for each product render the product component */}
         <Wrapper>
-          {/* render the session only if there is any product with the following category. And for each product render the product component */}
           {products.filter((product) => product.category === 'food').length >
             0 && (
             <Session title="Refeições">

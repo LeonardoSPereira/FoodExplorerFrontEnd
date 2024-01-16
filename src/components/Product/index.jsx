@@ -7,11 +7,12 @@ import { Button } from '../Button'
 import { Container, ButtonMenu, Price, Stepper, Wrapper } from './styles'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
+import { useCart } from '../../hooks/cart'
 import { api } from '../../services/api'
 
 export function Product({ product }) {
   const { user } = useAuth()
-
+  const { addToCart, cart } = useCart()
   const navigate = useNavigate()
 
   // state to control if the product is favorite or not
@@ -74,6 +75,24 @@ export function Product({ product }) {
     }
   }
 
+  // function to add the product to cart and show the toast
+  function handleAddProductToCart() {
+    setOpenToast(false)
+
+    const productToCart = {
+      product_id: product.id,
+      quantity: stepperValue,
+      price_per_item: product.price_in_cents,
+    }
+
+    // add the product to cart
+    const response = addToCart(productToCart)
+
+    setToastTitle(response.status)
+    setToastDescription(response.message)
+    setOpenToast(true)
+  }
+
   // useEffect to get the favorites from the api
   useEffect(() => {
     async function getFavorites() {
@@ -93,7 +112,7 @@ export function Product({ product }) {
   useEffect(() => {
     setTimeout(() => {
       setOpenToast(false)
-    }, 2000)
+    }, 1500)
   }, [isFavorite])
 
   return (
@@ -160,7 +179,9 @@ export function Product({ product }) {
           )}
 
           {/* button to add the product to the cart */}
-          {!user.isAdmin && <Button title="Incluir" />}
+          {!user.isAdmin && (
+            <Button title="Incluir" onClick={handleAddProductToCart} />
+          )}
         </Wrapper>
       </Container>
     </>

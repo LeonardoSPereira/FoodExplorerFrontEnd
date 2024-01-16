@@ -20,7 +20,7 @@ export const MobileMenu = styled.header`
   align-items: center;
   justify-content: space-between;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     display: none;
   }
 `
@@ -116,12 +116,12 @@ export const DesktopMenu = styled.header`
     color: ${({ theme }) => theme.colors.light_300};
   }
 
-  button:nth-child(3),
-  button:nth-child(4) {
+  button:nth-child(4),
+  button:nth-child(5) {
     max-width: 22rem;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     display: flex;
   }
 `
