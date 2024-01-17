@@ -52,17 +52,18 @@ export function Product() {
   function handleAddToCart() {
     setOpenToast(false)
 
-    const cartItem = {
+    const productToCart = {
       id: product.id,
       title: product.title,
       price: product.price_in_cents,
       quantity: stepperValue,
     }
 
-    addToCart(cartItem)
+    // add the product to cart
+    const response = addToCart(productToCart)
 
-    setToastTitle('Success')
-    setToastDescription('Item adicionado ao carrinho')
+    setToastTitle(response.status)
+    setToastDescription(response.message)
     setOpenToast(true)
   }
 
@@ -73,13 +74,6 @@ export function Product() {
       setProduct(response.data)
     }
     getProduct()
-  })
-
-  // to close the toast after 2 seconds
-  useEffect(() => {
-    setTimeout(() => {
-      setOpenToast(false)
-    }, 2000)
   })
 
   return (

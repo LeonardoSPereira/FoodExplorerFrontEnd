@@ -18,27 +18,25 @@ export function Toast({ label, title, openToast, description }) {
   }
 
   // function to close the toast after 3 seconds
-  function closeToastAfterDelay() {
-    setTimeout(() => {
-      setOpen(false)
-    }, 3000)
-  }
+  // function closeToastAfterDelay() {
+  //   setTimeout(() => {
+  //     setOpen(false)
+  //   }, 2000)
+  // }
 
   // useEffect to update the state of the toast
-  useEffect(() => {
-    setOpen(openToast)
+  // useEffect(() => {
+  //   setOpen(openToast)
 
-    if (openToast) {
-      closeToastAfterDelay()
-    }
-  }, [openToast])
+  //   if (openToast) {
+  //     closeToastAfterDelay()
+  //   }
+  // }, [openToast])
 
   return (
     <ToastPrimitive.Provider label={label}>
-      {/* if the toast is open, then render the toast */}
-      <StyledToastRoot open={open}>
+      <StyledToastRoot open={open} duration={2000}>
         {
-          // if the title is success, then render the success icon, else, render the error icon
           <StyledTitle>
             {title === 'Success' ? (
               <FaCheckCircle className="success" />

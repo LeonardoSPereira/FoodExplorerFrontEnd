@@ -27,6 +27,7 @@ export function Product({ product }) {
   const [toastTitle, setToastTitle] = useState('')
   const [toastDescription, setToastDescription] = useState('')
 
+  // create the paths to the product and edit pages navigation
   const productPath = `/product/${product.id}`
   const editPath = `/edit/${product.id}`
 
@@ -109,16 +110,8 @@ export function Product({ product }) {
     getFavorites()
   })
 
-  // useEffect to close the toast after 2 seconds
-  useEffect(() => {
-    setTimeout(() => {
-      setOpenToast(false)
-    }, 1500)
-  }, [isFavorite])
-
   return (
     <>
-      {/* render the toast */}
       {openToast && (
         <Toast
           title={toastTitle}
@@ -128,7 +121,6 @@ export function Product({ product }) {
       )}
 
       <Container className="keen-slider__slide">
-        {/* check if user is admin and render the edit button. If not render the favorite button based if the product is favorite or not */}
         {user.isAdmin ? (
           <ButtonMenu onClick={() => navigate(editPath)}>
             <PiPencilSimpleLight />
@@ -145,7 +137,6 @@ export function Product({ product }) {
 
         <img src={imageURL} alt={product.title} />
 
-        {/* render the name of the product */}
         <Link to={productPath}>
           {product.title}
           <MdKeyboardArrowRight />
@@ -153,7 +144,6 @@ export function Product({ product }) {
 
         <p>{product.description}</p>
 
-        {/* render the price of the product */}
         <Price>
           {(product.price_in_cents / 100).toLocaleString('pt-BR', {
             style: 'currency',
@@ -162,7 +152,6 @@ export function Product({ product }) {
         </Price>
 
         <Wrapper>
-          {/* stepper to control the quantity of the product */}
           {!user.isAdmin && (
             <Stepper>
               <button
@@ -181,7 +170,6 @@ export function Product({ product }) {
             </Stepper>
           )}
 
-          {/* button to add the product to the cart */}
           {!user.isAdmin && (
             <Button title="Incluir" onClick={handleAddProductToCart} />
           )}

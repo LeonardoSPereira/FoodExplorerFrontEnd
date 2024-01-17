@@ -28,6 +28,17 @@ export function Header({ onChange }) {
 
   const navigate = useNavigate()
 
+  // function to handle navigation and close menu
+  function handleNavigate(path = '') {
+    if (path) {
+      navigate(`/${path}`)
+    } else {
+      navigate('/')
+    }
+    setIsMenuOpen(false)
+  }
+
+  // function to handle sign out
   function handleSignOut() {
     signOut()
     navigate('/')
@@ -47,7 +58,7 @@ export function Header({ onChange }) {
         )}
 
         {!user.isAdmin && (
-          <ButtonMenu onClick={() => navigate('/order')}>
+          <ButtonMenu onClick={() => handleNavigate('order')}>
             <PiReceipt />
             <span>{cart.length}</span>
           </ButtonMenu>
@@ -70,21 +81,30 @@ export function Header({ onChange }) {
             onChange={(e) => onChange(e.target.value)}
           />
 
-          <ItemMenu title="Home" onClick={() => navigate('/')} />
+          <ItemMenu title="Home" onClick={() => handleNavigate()} />
 
           {user.isAdmin ? (
-            <ItemMenu title="Novo Prato" onClick={() => navigate('/new')} />
+            <ItemMenu
+              title="Novo Prato"
+              onClick={() => handleNavigate('new')}
+            />
           ) : (
             <ItemMenu
               title="Meus Favoritos"
-              onClick={() => navigate('/favorites')}
+              onClick={() => handleNavigate('favorites')}
             />
           )}
 
           {user.isAdmin ? (
-            <ItemMenu title="Pedidos" onClick={() => navigate('/orders')} />
+            <ItemMenu
+              title="Pedidos"
+              onClick={() => handleNavigate('orders')}
+            />
           ) : (
-            <ItemMenu title="Histórico" onClick={() => navigate('/orders')} />
+            <ItemMenu
+              title="Histórico"
+              onClick={() => handleNavigate('orders')}
+            />
           )}
 
           <ItemMenu title="Sair" onClick={handleSignOut} />
@@ -95,9 +115,13 @@ export function Header({ onChange }) {
 
       <DesktopMenu>
         {user.isAdmin ? (
-          <img src={AdminLogo} alt="Logo" />
+          <Link to="/">
+            <img src={AdminLogo} alt="Logo" />
+          </Link>
         ) : (
-          <img src={LogoMobile} alt="Logo" />
+          <Link to="/">
+            <img src={LogoMobile} alt="Logo" />
+          </Link>
         )}
 
         <Input

@@ -7,7 +7,6 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  /* gap: 1rem; */
   background-color: ${({ theme }) => theme.colors.dark_600};
 
   img {
@@ -29,7 +28,7 @@ export const Container = styled.div`
   }
 
   @media (min-width: 768px) {
-    padding: 0 12.3rem;
+    padding: 0 6rem;
 
     img {
       width: 18rem;
