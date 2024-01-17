@@ -154,8 +154,10 @@ export function Product({ product }) {
 
         {/* render the price of the product */}
         <Price>
-          <span>R$ </span>
-          <span>{String(product.price_in_cents / 100).replace('.', ',')}</span>
+          {(product.price_in_cents / 100).toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          })}
         </Price>
 
         <Wrapper>

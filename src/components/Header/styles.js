@@ -2,17 +2,12 @@ import { styled } from 'styled-components'
 
 export const Container = styled.div`
   width: 100%;
-  height: 10.4rem;
+  min-height: 10.4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 2.8rem;
-
   background-color: ${({ theme }) => theme.colors.dark_700};
-
-  @media (min-width: 768px) {
-    margin-bottom: 16.4rem;
-  }
 `
 
 export const MobileMenu = styled.header`

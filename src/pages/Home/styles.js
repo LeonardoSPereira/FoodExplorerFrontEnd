@@ -103,7 +103,7 @@ export const Banner = styled.div`
 
   @media (min-width: 800px) {
     height: 22rem;
-    margin: 0 8rem;
+    margin: 6rem 8rem 0;
 
     img {
       width: 40rem;
@@ -114,6 +114,7 @@ export const Banner = styled.div`
   }
 
   @media (min-width: 1000px) {
+    margin-top: 8rem;
     img {
       margin-top: -8rem;
     }
@@ -121,7 +122,7 @@ export const Banner = styled.div`
 
   @media (min-width: 1200px) {
     height: 24rem;
-    margin: 0 10rem;
+    margin: 18rem 10rem 0;
 
     img {
       width: 56rem;
