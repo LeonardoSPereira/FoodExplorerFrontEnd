@@ -16,7 +16,7 @@ import { Header } from '../../components/Header'
 import { Button } from '../../components/Button'
 import { Footer } from '../../components/Footer'
 import { Toast } from '../../components/Toast'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
 import { useAuth } from '../../hooks/auth'
 import { useCart } from '../../hooks/cart'
@@ -25,18 +25,21 @@ export function Product() {
   const { user } = useAuth()
   const { addToCart } = useCart()
   const { id } = useParams()
+  const navigate = useNavigate()
 
   // state to control the product
   const [product, setProduct] = useState({})
   const [stepperValue, setStepperValue] = useState(1)
-  console.log(product)
 
   // state to control the toast
   const [openToast, setOpenToast] = useState(false)
   const [toastTitle, setToastTitle] = useState('')
   const [toastDescription, setToastDescription] = useState('')
 
+  // create the image url
   const imageURL = `${api.defaults.baseURL}/files/${product.image}`
+
+  // create the button title with the price
   const buttonTitle = `pedir ∙ ${(product.price_in_cents / 100).toLocaleString(
     'pt-BR',
     {
@@ -45,6 +48,25 @@ export function Product() {
     },
   )}`
 
+  // function to add the product to the cart
+  function handleAddToCart() {
+    setOpenToast(false)
+
+    const cartItem = {
+      id: product.id,
+      title: product.title,
+      price: product.price_in_cents,
+      quantity: stepperValue,
+    }
+
+    addToCart(cartItem)
+
+    setToastTitle('Success')
+    setToastDescription('Item adicionado ao carrinho')
+    setOpenToast(true)
+  }
+
+  // get the product from the api
   useEffect(() => {
     async function getProduct() {
       const response = await api.get(`/products/${id}`)
@@ -59,13 +81,14 @@ export function Product() {
       setOpenToast(false)
     }, 2000)
   })
+
   return (
     <>
       {openToast && (
         <Toast
-          title={toastTitle}
+          open={openToast}
           description={toastDescription}
-          setOpenToast={setOpenToast}
+          title={toastTitle}
         />
       )}
 
@@ -114,9 +137,16 @@ export function Product() {
                 )}
 
                 {user.isAdmin ? (
-                  <Button title="Editar prato" />
+                  <Button
+                    title="Editar prato"
+                    onClick={() => navigate(`/edit/${product.id}`)}
+                  />
                 ) : (
-                  <Button icon={PiReceipt} title={buttonTitle} />
+                  <Button
+                    icon={PiReceipt}
+                    title={buttonTitle}
+                    onClick={handleAddToCart}
+                  />
                 )}
               </CartSection>
             </ProductInfo>

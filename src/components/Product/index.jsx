@@ -12,7 +12,7 @@ import { api } from '../../services/api'
 
 export function Product({ product }) {
   const { user } = useAuth()
-  const { addToCart, cart } = useCart()
+  const { addToCart } = useCart()
   const navigate = useNavigate()
 
   // state to control if the product is favorite or not
@@ -81,6 +81,7 @@ export function Product({ product }) {
 
     const productToCart = {
       product_id: product.id,
+      title: product.title,
       quantity: stepperValue,
       price_per_item: product.price_in_cents,
     }
