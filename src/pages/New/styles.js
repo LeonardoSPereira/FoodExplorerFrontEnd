@@ -26,7 +26,7 @@ export const Form = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 2.8rem;
 
   /* Styles to change the input type file */
   > div:first-child {
