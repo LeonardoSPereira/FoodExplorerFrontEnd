@@ -6,8 +6,8 @@ export const Container = styled(Link)`
   align-items: center;
 
   svg {
-    width: 3.2rem;
-    height: 3.2rem;
+    width: 2.4rem;
+    height: 2.4rem;
     color: ${({ theme }) => theme.colors.light_100};
   }
 
@@ -17,5 +17,20 @@ export const Container = styled(Link)`
     font-weight: 500;
     line-height: 140%;
     color: ${({ theme }) => theme.colors.light_300};
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  @media (min-width: 768px) {
+    svg {
+      width: 3.2rem;
+      height: 3.2rem;
+    }
+
+    p {
+      font-size: 3.2rem;
+    }
   }
 `

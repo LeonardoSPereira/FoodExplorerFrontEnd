@@ -37,4 +37,13 @@ export const Wrapper = styled.div`
     height: 2.4rem;
     color: ${({ theme }) => theme.colors.light_400};
   }
+
+  span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 2.4rem;
+    text-align: center;
+    color: ${({ theme }) => theme.colors.light_100};
+  }
 `
