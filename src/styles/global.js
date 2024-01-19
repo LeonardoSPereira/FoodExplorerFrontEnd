@@ -35,4 +35,18 @@ export default createGlobalStyle`
     filter: brightness(0.8);
   }
 
+  &::-webkit-scrollbar {
+    width: 0.8rem;
+    height: 4rem;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.dark_1000};
+    border-radius: 0.8rem;
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: ${({ theme }) => theme.colors.pink} transparent;
+
 `

@@ -8,6 +8,7 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   gap: 1.6rem;
+  margin-right: 4rem;
 
   @media (min-width: 768px) {
     gap: 2.4rem;

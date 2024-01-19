@@ -8,13 +8,13 @@ export function Slider({ children }) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
   const [sliderRef, instanceRef] = useKeenSlider({
-    initial: 1,
     loop: true,
+    drag: true,
     slides: {
       perView: 'auto',
       spacing: 5,
     },
-    renderMode: 'performance',
+    renderMode: 'precision',
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel)
     },

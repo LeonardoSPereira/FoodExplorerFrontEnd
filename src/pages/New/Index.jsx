@@ -8,33 +8,29 @@ import {
   IngredientsWrapper,
 } from './styles'
 import { FiUpload } from 'react-icons/fi'
-import { Header } from '../../components/Header'
-import { Input } from '../../components/Input'
-import { Button } from '../../components/Button'
-import { BackButton } from '../../components/BackButton'
-import { Footer } from '../../components/Footer'
-import { Toast } from '../../components/Toast'
-import { Select } from '../../components/Select'
 import { IngredientItem } from '../../components/IngredientItem'
+import { BackButton } from '../../components/BackButton'
 import { TextArea } from '../../components/TextArea'
+import { Header } from '../../components/Header'
+import { Button } from '../../components/Button'
+import { Footer } from '../../components/Footer'
+import { Select } from '../../components/Select'
+import { Input } from '../../components/Input'
+import { Toast } from '../../components/Toast'
+import { api } from '../../services/api'
+import { useNavigate } from 'react-router-dom'
 
 export function New() {
   // state to control the selected file
   const [selectedFile, setSelectedFile] = useState(null)
-  const [selectedName, setSelectedName] = useState('Imagem')
+  const [selectedImageName, setSelectedImageName] = useState('Imagem')
 
-  const [name, setName] = useState('')
-
-  // state to control the selected category
+  // states to control the product info
+  const [title, setTitle] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
-  console.log(selectedCategory)
-
-  // state to control the ingredients
   const [ingredients, setIngredients] = useState([])
   const [newIngredient, setNewIngredient] = useState('')
-
   const [price, setPrice] = useState(0)
-
   const [description, setDescription] = useState('')
 
   // state to control the toast
@@ -49,22 +45,71 @@ export function New() {
     { value: 'drink', name: 'Bebida' },
   ]
 
+  // hook to navigate between pages
+  const navigate = useNavigate()
+
   // function to handle the file change
   function handleFileChange(event) {
     const file = event.target.files[0]
     setSelectedFile(file)
-    setSelectedName(file.name)
+    setSelectedImageName(file.name)
   }
 
+  // function to handle the add ingredient
   function handleAddIngredient() {
     setIngredients((prevState) => [...prevState, newIngredient])
     setNewIngredient('')
   }
 
+  // function to handle the delete ingredient
   function handleDeleteIngredient(ingredient) {
     setIngredients((prevState) =>
       prevState.filter((item) => item !== ingredient),
     )
+  }
+
+  // function to handle the create product
+  async function handleCreateProduct(e) {
+    e.preventDefault()
+    setOpenToast(false)
+
+    try {
+      // create the product
+      const response = await api.post('/products', {
+        title,
+        category: selectedCategory,
+        price_in_cents: price,
+        description,
+        ingredients,
+      })
+
+      const { productId } = response.data
+
+      // upload the image
+      const fileUploadForm = new FormData()
+      fileUploadForm.append('image', selectedFile)
+
+      const fileResponse = await api.put(
+        `/products/image/${productId}`,
+        fileUploadForm,
+      )
+
+      // show the toast and redirect to the home page after 2 seconds
+      if (fileResponse.data.status === 'Success') {
+        setToastTitle(response.data.status)
+        setToastDescription(response.data.message)
+        setOpenToast(true)
+      }
+
+      setTimeout(() => {
+        navigate('/')
+      }, 2000)
+    } catch (error) {
+      console.error(error)
+      setToastTitle(error.response.data.status)
+      setToastDescription(error.response.data.message)
+      setOpenToast(true)
+    }
   }
 
   return (
@@ -88,7 +133,7 @@ export function New() {
             <Wrapper>
               <Input
                 icon={FiUpload}
-                name={selectedName}
+                name={selectedImageName}
                 type="file"
                 label="Imagem do prato"
                 accept="image/*"
@@ -99,7 +144,7 @@ export function New() {
               <Input
                 label="Nome"
                 placeholder="Ex.: Salada Caesar"
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setTitle(e.target.value)}
               />
 
               <Select
@@ -132,7 +177,6 @@ export function New() {
               </IngredientsWrapper>
 
               <Input
-                type="number"
                 label="Preço"
                 placeholder="R$ 00.00"
                 onChange={(e) => setPrice(e.target.value)}
@@ -149,13 +193,14 @@ export function New() {
               title="Salvar produto"
               disabled={
                 selectedFile === null ||
-                name === '' ||
+                title === '' ||
                 selectedCategory === '' ||
                 ingredients.length === 0 ||
                 newIngredient !== '' ||
                 price === 0 ||
                 description === ''
               }
+              onClick={handleCreateProduct}
             />
           </Form>
         </Content>
