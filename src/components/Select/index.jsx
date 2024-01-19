@@ -3,6 +3,7 @@ import { forwardRef } from 'react'
 import * as SelectPrimitive from '@radix-ui/react-select'
 import {
   Container,
+  SelectRoot,
   SelectTrigger,
   SelectContent,
   SelectIcon,
@@ -20,7 +21,7 @@ export function Select({ onChange, label, title, values }) {
     <Container>
       <label htmlFor={label}>{label}</label>
 
-      <SelectPrimitive.Root onValueChange={onChange} required>
+      <SelectRoot onValueChange={onChange} required>
         <SelectTrigger id={label} aria-label={label}>
           <SelectPrimitive.Value placeholder={title} />
           <SelectIcon>
@@ -45,7 +46,7 @@ export function Select({ onChange, label, title, values }) {
             </SelectViewport>
           </SelectContent>
         </SelectPrimitive.Portal>
-      </SelectPrimitive.Root>
+      </SelectRoot>
     </Container>
   )
 }

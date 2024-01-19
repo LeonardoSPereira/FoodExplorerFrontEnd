@@ -20,6 +20,10 @@ export const Content = styled.main`
     line-height: 140%;
     color: ${({ theme }) => theme.colors.light_300};
   }
+
+  @media (min-width: 768px) {
+    padding: 4rem 6rem 6rem;
+  }
 `
 
 export const Form = styled.form`
@@ -28,6 +32,23 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 2.8rem;
 
+  @media (min-width: 768px) {
+    gap: 3.2rem;
+
+    > button {
+      width: 20%;
+      align-self: end;
+    }
+  }
+`
+
+export const Wrapper = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.4rem;
+
   /* Styles to change the input type file */
   > div:first-child {
     height: fit-content;
@@ -35,22 +56,75 @@ export const Form = styled.form`
     overflow: hidden;
     display: inline-block;
 
-    div {
+    > div {
       margin-top: 1.6rem;
+      height: 4.8rem;
     }
 
-    svg {
+    > svg {
       color: ${({ theme }) => theme.colors.light_100};
     }
 
     input {
       opacity: 0;
       position: absolute;
-      top: 0;
+      top: 42%;
       left: 0;
       width: 100%;
       height: 100%;
       cursor: pointer;
     }
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 3.2rem;
+
+    > div:first-child {
+      width: 50%;
+    }
+
+    > div:last-child {
+      width: 60%;
+    }
+  }
+`
+
+export const ProductInfoWrapper = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.4rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+
+    > div:last-child {
+      width: 30%;
+    }
+  }
+`
+
+export const IngredientsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  > label {
+    color: ${({ theme }) => theme.colors.light_400};
+  }
+
+  > div {
+    min-height: 4.8rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.6rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.8rem;
+    background-color: ${({ theme }) => theme.colors.dark_900};
   }
 `

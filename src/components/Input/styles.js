@@ -2,11 +2,10 @@ import { styled } from 'styled-components'
 
 export const Container = styled.div`
   width: 100%;
-  height: 4.8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.8rem;
+  gap: 1.6rem;
 
   label {
     color: ${({ theme }) => theme.colors.light_400};
@@ -15,6 +14,7 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
   width: 100%;
+  height: 5rem;
   display: flex;
   gap: 1.4rem;
   padding: 1.2rem 1.4rem;
@@ -25,11 +25,23 @@ export const Wrapper = styled.div`
   input {
     width: 100%;
     height: 100%;
+    max-height: 5rem;
     background-color: transparent;
     border: none;
     outline: none;
     font-size: 1.6rem;
     color: ${({ theme }) => theme.colors.light_400};
+
+    &[type='number']::-webkit-outer-spin-button,
+    &[type='number']::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type='number'] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
   }
 
   svg {

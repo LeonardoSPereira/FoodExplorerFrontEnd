@@ -22,15 +22,4 @@ export const Container = styled(Link)`
   &:hover {
     opacity: 0.8;
   }
-
-  @media (min-width: 768px) {
-    svg {
-      width: 3.2rem;
-      height: 3.2rem;
-    }
-
-    p {
-      font-size: 3.2rem;
-    }
-  }
 `

@@ -2,6 +2,7 @@ import { styled } from 'styled-components'
 import * as Select from '@radix-ui/react-select'
 
 export const Container = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
@@ -13,6 +14,9 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.colors.light_400};
   }
 `
+export const SelectRoot = styled(Select.Root)`
+  height: 5rem;
+`
 
 export const SelectTrigger = styled(Select.SelectTrigger)`
   all: unset;
@@ -20,7 +24,7 @@ export const SelectTrigger = styled(Select.SelectTrigger)`
   align-items: center;
   justify-content: space-between;
   border-radius: 0.8rem;
-  padding: 1.6rem;
+  padding: 1.4rem;
   font-size: 1.6rem;
   background-color: ${({ theme }) => theme.colors.dark_900};
   color: ${({ theme }) => theme.colors.light_400};
