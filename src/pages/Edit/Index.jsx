@@ -6,6 +6,7 @@ import {
   Wrapper,
   ProductInfoWrapper,
   IngredientsWrapper,
+  ControlsWrapper,
 } from './styles'
 import { FiUpload } from 'react-icons/fi'
 import { IngredientItem } from '../../components/IngredientItem'
@@ -17,6 +18,7 @@ import { Footer } from '../../components/Footer'
 import { Select } from '../../components/Select'
 import { Input } from '../../components/Input'
 import { Toast } from '../../components/Toast'
+import { Dialog } from '../../components/Dialog'
 import { api } from '../../services/api'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -33,6 +35,8 @@ export function Edit() {
   const [rawPrice, setRawPrice] = useState('')
   const [price, setPrice] = useState('')
   const [description, setDescription] = useState('')
+
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false)
 
   // state to control the toast
   const [openToast, setOpenToast] = useState(false)
@@ -123,6 +127,26 @@ export function Edit() {
           navigate('/')
         }, 2000)
       }
+    } catch (error) {
+      console.error(error)
+      setToastTitle(error.response.data.status)
+      setToastDescription(error.response.data.message)
+      setOpenToast(true)
+    }
+  }
+
+  async function handleDeleteProduct() {
+    setOpenToast(false)
+    // e.preventDefault()
+
+    try {
+      const response = await api.delete(`/products/${id}`)
+      setToastTitle(response.data.status)
+      setToastDescription(response.data.message)
+      setOpenToast(true)
+      setTimeout(() => {
+        navigate('/')
+      }, 2000)
     } catch (error) {
       console.error(error)
       setToastTitle(error.response.data.status)
@@ -234,18 +258,28 @@ export function Edit() {
               onChange={(e) => setDescription(e.target.value)}
             />
 
-            <Button
-              title="Salvar produto"
-              disabled={
-                title === '' ||
-                selectedCategory === '' ||
-                ingredients.length === 0 ||
-                newIngredient !== '' ||
-                price === 0 ||
-                description === ''
-              }
-              onClick={handleUpdateProduct}
-            />
+            <ControlsWrapper>
+              <Dialog
+                title="Tem certeza que deseja excluir?"
+                content="Ao clicar em 'Deletar' o produto será excluído. Essa ação não poderá ser desfeita"
+                deleteConfirmation={handleDeleteProduct}
+              >
+                <Button deleteStyle title="Excluir prato" />
+              </Dialog>
+
+              <Button
+                title="Salvar prato"
+                disabled={
+                  title === '' ||
+                  selectedCategory === '' ||
+                  ingredients.length === 0 ||
+                  newIngredient !== '' ||
+                  price === 0 ||
+                  description === ''
+                }
+                onClick={handleUpdateProduct}
+              />
+            </ControlsWrapper>
           </Form>
         </Content>
 

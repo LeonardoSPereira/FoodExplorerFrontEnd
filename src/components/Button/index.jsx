@@ -1,11 +1,17 @@
+// Import necessary modules from React
+import React, { forwardRef } from 'react'
 import { Container } from './styles'
 
-export function Button({ icon: Icon, title, items, ...rest }) {
-  return (
-    <Container {...rest}>
-      {Icon && <Icon />}
-      <h1>{title}</h1>
-      {items && <p>({items})</p>}
-    </Container>
-  )
-}
+export const Button = forwardRef(
+  ({ icon: Icon, title, items, deleteStyle, ...rest }, ref) => {
+    return (
+      <Container ref={ref} $delete={deleteStyle} {...rest}>
+        {Icon && <Icon />}
+        <h1>{title}</h1>
+        {items && <p>({items})</p>}
+      </Container>
+    )
+  },
+)
+
+Button.displayName = 'Button'

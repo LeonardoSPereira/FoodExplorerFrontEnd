@@ -9,7 +9,8 @@ export const Container = styled.button`
   gap: 0.8rem;
   border-radius: 0.5rem;
   border: 0;
-  background-color: ${({ theme }) => theme.colors.tomato_100};
+  background-color: ${({ theme, $delete }) =>
+    $delete ? theme.colors.dark_800 : theme.colors.tomato_100};
   color: ${({ theme }) => theme.colors.light_100};
 
   svg {
@@ -26,7 +27,8 @@ export const Container = styled.button`
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.tomato_200};
+    background-color: ${({ theme, $delete }) =>
+      $delete ? theme.colors.dark_900 : theme.colors.tomato_200};
   }
 
   &:disabled {

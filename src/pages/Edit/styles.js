@@ -34,11 +34,6 @@ export const Form = styled.form`
 
   @media (min-width: 768px) {
     gap: 3.2rem;
-
-    > button {
-      width: 20%;
-      align-self: end;
-    }
   }
 `
 
@@ -126,5 +121,17 @@ export const IngredientsWrapper = styled.div`
     padding: 0.4rem 0.8rem;
     border-radius: 0.8rem;
     background-color: ${({ theme }) => theme.colors.dark_900};
+  }
+`
+
+export const ControlsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 3.2rem;
+
+  @media (min-width: 768px) {
+    width: 50%;
+    align-self: end;
   }
 `

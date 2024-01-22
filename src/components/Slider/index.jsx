@@ -10,11 +10,10 @@ export function Slider({ children }) {
   const [sliderRef, instanceRef] = useKeenSlider({
     loop: true,
     drag: true,
+    centered: true,
     slides: {
       perView: 'auto',
-      spacing: 5,
     },
-    renderMode: 'precision',
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel)
     },

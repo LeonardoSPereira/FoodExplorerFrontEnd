@@ -8,16 +8,14 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   gap: 1.6rem;
-  margin-right: 4rem;
+  margin-right: 1rem;
 
   @media (min-width: 768px) {
     gap: 2.4rem;
   }
 `
 
-export const ArrowStyled = styled.div.attrs((props) => ({
-  className: props.className,
-}))`
+export const ArrowStyled = styled.div`
   width: 16rem;
   height: 44rem;
   font-size: 4rem;
