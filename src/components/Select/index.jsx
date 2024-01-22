@@ -16,12 +16,12 @@ import {
 import { GoChevronDown } from 'react-icons/go'
 import { BsCheck2 } from 'react-icons/bs'
 
-export function Select({ onChange, label, title, values }) {
+export function Select({ onChange, value, label, title, values }) {
   return (
     <Container>
       <label htmlFor={label}>{label}</label>
 
-      <SelectRoot onValueChange={onChange} required>
+      <SelectRoot value={value} onValueChange={onChange} required>
         <SelectTrigger id={label} aria-label={label}>
           <SelectPrimitive.Value placeholder={title} />
           <SelectIcon>
