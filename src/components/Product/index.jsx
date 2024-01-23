@@ -82,6 +82,7 @@ export function Product({ product }) {
 
     const productToCart = {
       product_id: product.id,
+      image: product.image,
       title: product.title,
       quantity: stepperValue,
       price_per_item: product.price_in_cents,
