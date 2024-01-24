@@ -29,7 +29,7 @@ export function Tabs({ page, onClick }) {
         </TabsTrigger>
       </TabsList>
 
-      {page === 'payment' && (
+      {(page === 'payment' || page === 'order') && (
         <>
           <TabsContent value="pix">
             <img src={qrCode} alt="qr code" />

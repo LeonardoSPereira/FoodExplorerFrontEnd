@@ -1,11 +1,32 @@
 import { styled } from 'styled-components'
 
 export const Container = styled.div`
+  width: 100%;
   min-height: 100vh;
   display: grid;
   grid-template-rows: 10.4rem auto 7.7rem;
 `
-export const Content = styled.main`
+
+export const MobileContent = styled.main`
+  @media (min-width: 1024px) {
+    display: none;
+  }
+`
+
+export const DesktopContent = styled.main`
+  width: 100%;
+  height: 100%;
+  display: none;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 10rem;
+  }
+`
+
+export const Content = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;

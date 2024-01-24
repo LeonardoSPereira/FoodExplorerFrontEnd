@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Container, Content } from './styles'
+import { Container, Content, MobileContent, DesktopContent } from './styles'
 import { useParams, useNavigate } from 'react-router-dom'
 import { OrderProduct } from '../../components/OrderProduct'
 import { Header } from '../../components/Header'
@@ -13,13 +13,14 @@ import { api } from '../../services/api'
 export function Order() {
   // initializing cart hook
   const { cart, removeFromCart, removeAllFromCart } = useCart()
+  console.log('cart', cart)
 
   // initializing page state
   const [page, setPage] = useState('order')
 
   // initializing order state
-  const [order, setOrder] = useState({})
-  console.log(order)
+  const [orderItems, setOrderItems] = useState([])
+  console.log('order', orderItems)
 
   // state to control the toast
   const [openToast, setOpenToast] = useState(false)
@@ -27,9 +28,16 @@ export function Order() {
   const [toastDescription, setToastDescription] = useState('')
 
   // calculating total
-  const total = cart.reduce((sum, item) => {
-    return sum + item.quantity * item.price_per_item
-  }, 0)
+  let total
+  if (cart.length !== 0) {
+    total = cart.reduce((sum, item) => {
+      return sum + item.quantity * item.price_per_item
+    }, 0)
+  } else {
+    total = orderItems.reduce((sum, item) => {
+      return sum + item.quantity * item.price_in_cents
+    }, 0)
+  }
 
   // getting id from url
   const { id } = useParams()
@@ -69,7 +77,7 @@ export function Order() {
     if (id) {
       async function fetchOrder() {
         const response = await api.get(`/orders/${id}`)
-        setOrder(response.data)
+        setOrderItems(response.data.order.orderItems)
         setPage(response.data.order.status)
       }
       fetchOrder()
@@ -88,50 +96,117 @@ export function Order() {
 
       <Container>
         <Header />
-        {cart.length === 0 && !id && (
-          <Content>
-            <h3>Seu pedido está vazio.</h3>
-            <p>
-              Adicione produtos clicando no botão{' '}
-              <strong>&quot;Incluir&quot;</strong> na página inicial ou do
-              produto.
-            </p>
-          </Content>
-        )}
 
-        {cart.length !== 0 && page === 'order' && (
-          <Content>
-            <h1>Meu pedido</h1>
-            {cart.map((product) => (
-              <OrderProduct
-                key={product.product_id}
-                product={product}
-                onClick={() => handleRemoveFromCart(product.product_id)}
-              />
-            ))}
-            <h2>
-              Total:{' '}
-              {(total / 100).toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              })}
-            </h2>
-
-            <Button title="Avançar" onClick={() => setPage('payment')} />
-          </Content>
-        )}
-
-        {(cart.length !== 0 || id) &&
-          (page === 'payment' ||
-            page === 'pending' ||
-            page === 'preparing' ||
-            page === 'delivered') && (
+        <MobileContent>
+          {cart.length === 0 && !id && (
             <Content>
-              <h1>Pagamento</h1>
-              <Tabs page={page} onClick={handleNewOrder} />
+              <h3>Seu pedido está vazio.</h3>
+              <p>
+                Adicione produtos clicando no botão{' '}
+                <strong>&quot;Incluir&quot;</strong> na página inicial ou do
+                produto.
+              </p>
             </Content>
           )}
 
+          {cart.length !== 0 && page === 'order' && (
+            <Content>
+              <h1>Meu pedido</h1>
+              {cart.map((cartItem) => (
+                <OrderProduct
+                  key={cartItem.product_id}
+                  product={cartItem}
+                  isNew
+                  onClick={() => handleRemoveFromCart(cartItem.product_id)}
+                />
+              ))}
+              <h2>
+                Total:{' '}
+                {(total / 100).toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
+              </h2>
+
+              <Button title="Avançar" onClick={() => setPage('payment')} />
+            </Content>
+          )}
+
+          {(cart.length !== 0 || id) &&
+            (page === 'payment' ||
+              page === 'pending' ||
+              page === 'preparing' ||
+              page === 'delivered') && (
+              <Content>
+                <h1>Pagamento</h1>
+                <Tabs page={page} onClick={handleNewOrder} />
+              </Content>
+            )}
+        </MobileContent>
+
+        <DesktopContent>
+          {cart.length === 0 && !id && (
+            <Content>
+              <h3>Seu pedido está vazio.</h3>
+              <p>
+                Adicione produtos clicando no botão{' '}
+                <strong>&quot;Incluir&quot;</strong> na página inicial ou do
+                produto.
+              </p>
+            </Content>
+          )}
+
+          {cart.length !== 0 && (page === 'order' || page === 'payment') && (
+            <Content>
+              <h1>Meu pedido</h1>
+              {cart.length !== 0 &&
+                cart.map((cartItem) => (
+                  <OrderProduct
+                    key={cartItem.product_id}
+                    isNew
+                    product={cartItem}
+                    onClick={() => handleRemoveFromCart(cartItem.product_id)}
+                  />
+                ))}
+
+              <h2>
+                Total:{' '}
+                {(total / 100).toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
+              </h2>
+            </Content>
+          )}
+
+          {cart.length === 0 && orderItems.length !== 0 && (
+            <Content>
+              <h1>Meu pedido</h1>
+              {orderItems.map((order) => (
+                <OrderProduct key={order.id} product={order} />
+              ))}
+              <h2>
+                Total:{' '}
+                {(total / 100).toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
+              </h2>
+            </Content>
+          )}
+
+          {(cart.length !== 0 || id) &&
+            (page === 'order' ||
+              page === 'payment' ||
+              page === 'pending' ||
+              page === 'preparing' ||
+              page === 'delivered') && (
+              <Content>
+                <h1>Pagamento</h1>
+                <Tabs page={page} onClick={handleNewOrder} />
+              </Content>
+            )}
+        </DesktopContent>
         <Footer />
       </Container>
     </>
