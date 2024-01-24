@@ -10,7 +10,7 @@ export const Content = styled.main`
   display: flex;
   flex-direction: column;
   align-items: start;
-  padding: 5.6rem 3.5rem 2rem;
+  padding: 5.6rem 3.5rem 8rem;
   gap: 2.4rem;
 
   > h1 {

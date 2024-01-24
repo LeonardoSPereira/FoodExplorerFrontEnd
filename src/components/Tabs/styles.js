@@ -61,8 +61,10 @@ export const TabsTrigger = styled(Tabs.Trigger)`
 export const TabsContent = styled(Tabs.Content)`
   width: 100%;
   height: 100%;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1.6rem;
   border-radius: 0rem 0rem 0.6rem 0.6rem;
   border: 1px solid ${({ theme }) => theme.colors.light_600};
 
@@ -75,6 +77,20 @@ export const TabsContent = styled(Tabs.Content)`
   &[data-state='active'] {
     display: flex;
     padding: 1.8rem;
+  }
+
+  svg {
+    width: 9.6rem;
+    height: 9.6rem;
+    color: ${({ theme }) => theme.colors.light_500};
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 160%;
+    text-align: center;
+    color: ${({ theme }) => theme.colors.light_500};
   }
 `
 

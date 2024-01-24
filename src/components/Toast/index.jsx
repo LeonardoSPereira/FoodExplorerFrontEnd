@@ -17,22 +17,6 @@ export function Toast({ label, title, openToast, description }) {
     setOpen(false)
   }
 
-  // function to close the toast after 3 seconds
-  // function closeToastAfterDelay() {
-  //   setTimeout(() => {
-  //     setOpen(false)
-  //   }, 2000)
-  // }
-
-  // useEffect to update the state of the toast
-  // useEffect(() => {
-  //   setOpen(openToast)
-
-  //   if (openToast) {
-  //     closeToastAfterDelay()
-  //   }
-  // }, [openToast])
-
   return (
     <ToastPrimitive.Provider label={label}>
       <StyledToastRoot open={open} duration={2000}>
