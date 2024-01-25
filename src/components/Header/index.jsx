@@ -57,7 +57,9 @@ export function Header({ onChange }) {
           <img src={LogoMobile} alt="Logo" />
         )}
 
-        {!user.isAdmin && (
+        {user.isAdmin ? (
+          <div></div>
+        ) : (
           <ButtonMenu onClick={() => handleNavigate('order')}>
             <PiReceipt />
             <span>{cart.length}</span>

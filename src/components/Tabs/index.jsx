@@ -7,8 +7,7 @@ import {
   Wrapper,
 } from './styles'
 import qrCode from '../../../assets/qrCode.svg'
-import { PiCreditCard, PiForkKnife } from 'react-icons/pi'
-import { FaRegCheckCircle } from 'react-icons/fa'
+import { PiCreditCard, PiForkKnife, PiCookingPot } from 'react-icons/pi'
 import { MdOutlinePix } from 'react-icons/md'
 import { CiClock2 } from 'react-icons/ci'
 import { Input } from '../Input'
@@ -58,12 +57,12 @@ export function Tabs({ page, onClick }) {
         <>
           <TabsContent value="pix">
             <CiClock2 />
-            <h2>Aguardando pagamento no caixa</h2>
+            <h2>Aguardando pagamento</h2>
           </TabsContent>
 
           <TabsContent value="card">
             <CiClock2 />
-            <h2>Aguardando pagamento no caixa</h2>
+            <h2>Aguardando pagamento</h2>
           </TabsContent>
         </>
       )}
@@ -71,13 +70,13 @@ export function Tabs({ page, onClick }) {
       {page === 'preparing' && (
         <>
           <TabsContent value="pix">
-            <FaRegCheckCircle />
-            <h2>Pagamento aprovado!</h2>
+            <PiCookingPot />
+            <h2>Pedido sendo preparado</h2>
           </TabsContent>
 
           <TabsContent value="card">
-            <FaRegCheckCircle />
-            <h2>Pagamento aprovado!</h2>
+            <PiCookingPot />
+            <h2>Pedido sendo preparado</h2>
           </TabsContent>
         </>
       )}

@@ -14,6 +14,31 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.colors.light_400};
   }
 `
+
+export const ValueWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  > div {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+
+    &[data-status='pending'] {
+      background-color: ${({ theme }) => theme.colors.tomato_300};
+    }
+
+    &[data-status='preparing'] {
+      background-color: ${({ theme }) => theme.colors.carrot};
+    }
+
+    &[data-status='delivered'] {
+      background-color: ${({ theme }) => theme.colors.mint};
+    }
+  }
+`
+
 export const SelectRoot = styled(Select.Root)`
   height: 5rem;
 `

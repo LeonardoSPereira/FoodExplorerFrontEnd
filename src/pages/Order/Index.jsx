@@ -8,12 +8,13 @@ import { Button } from '../../components/Button'
 import { Toast } from '../../components/Toast'
 import { Tabs } from '../../components/Tabs'
 import { useCart } from '../../hooks/cart'
+import { useAuth } from '../../hooks/auth'
 import { api } from '../../services/api'
 
 export function Order() {
-  // initializing cart hook
+  // initializing the hooks
   const { cart, removeFromCart, removeAllFromCart } = useCart()
-  console.log('cart', cart)
+  const { user } = useAuth()
 
   // initializing page state
   const [page, setPage] = useState('order')
@@ -136,12 +137,27 @@ export function Order() {
             (page === 'payment' ||
               page === 'pending' ||
               page === 'preparing' ||
-              page === 'delivered') && (
+              page === 'delivered') &&
+            (user.isAdmin ? (
               <Content>
-                <h1>Pagamento</h1>
+                <h1>Detalhes</h1>
+                {orderItems.map((order) => (
+                  <OrderProduct key={order.id} product={order} />
+                ))}
+                <h2>
+                  Total:{' '}
+                  {(total / 100).toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </h2>
+              </Content>
+            ) : (
+              <Content>
+                <h1>Status</h1>
                 <Tabs page={page} onClick={handleNewOrder} />
               </Content>
-            )}
+            ))}
         </MobileContent>
 
         <DesktopContent>
@@ -181,7 +197,7 @@ export function Order() {
 
           {cart.length === 0 && orderItems.length !== 0 && (
             <Content>
-              <h1>Meu pedido</h1>
+              <h1>Detalhes do pedido</h1>
               {orderItems.map((order) => (
                 <OrderProduct key={order.id} product={order} />
               ))}
@@ -202,7 +218,7 @@ export function Order() {
               page === 'preparing' ||
               page === 'delivered') && (
               <Content>
-                <h1>Pagamento</h1>
+                <h1>Status do Pedido</h1>
                 <Tabs page={page} onClick={handleNewOrder} />
               </Content>
             )}

@@ -3,6 +3,7 @@ import { forwardRef } from 'react'
 import * as SelectPrimitive from '@radix-ui/react-select'
 import {
   Container,
+  ValueWrapper,
   SelectRoot,
   SelectTrigger,
   SelectContent,
@@ -34,11 +35,15 @@ export function Select({ onChange, value, label, title, values }) {
               <SelectPrimitive.Group>
                 <SelectLabel>{label}</SelectLabel>
 
-                <SelectSeparator />
+                {label && <SelectSeparator />}
 
                 {values &&
                   values.map((value, index) => (
-                    <SelectItem key={index} value={value.value}>
+                    <SelectItem
+                      status={value.status}
+                      key={index}
+                      value={value.value}
+                    >
                       {value.name}
                     </SelectItem>
                   ))}
@@ -51,13 +56,20 @@ export function Select({ onChange, value, label, title, values }) {
   )
 }
 
-const SelectItem = forwardRef(({ children, ...props }, forwardedRef) => {
-  return (
-    <StyledItem {...props} ref={forwardedRef}>
-      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-      <StyledItemIndicator>
-        <BsCheck2 />
-      </StyledItemIndicator>
-    </StyledItem>
-  )
-})
+const SelectItem = forwardRef(
+  ({ status, children, ...props }, forwardedRef) => {
+    return (
+      <StyledItem {...props} ref={forwardedRef}>
+        <SelectPrimitive.ItemText>
+          <ValueWrapper>
+            {status && <div data-status={status}></div>}
+            {children}
+          </ValueWrapper>
+        </SelectPrimitive.ItemText>
+        <StyledItemIndicator>
+          <BsCheck2 />
+        </StyledItemIndicator>
+      </StyledItem>
+    )
+  },
+)
