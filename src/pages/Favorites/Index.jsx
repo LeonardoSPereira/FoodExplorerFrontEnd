@@ -7,12 +7,15 @@ import { Toast } from '../../components/Toast'
 import { api } from '../../services/api'
 
 export function Favorites() {
+  // favorites state
   const [favorites, setFavorites] = useState([])
 
+  // toast state
   const [openToast, setOpenToast] = useState(false)
   const [toastTitle, setToastTitle] = useState('')
   const [toastDescription, setToastDescription] = useState('')
 
+  // handle remove favorite product
   async function handleRemoveFavoriteProduct(id) {
     setOpenToast(false)
 
@@ -29,6 +32,7 @@ export function Favorites() {
     }
   }
 
+  // useEffect to load all favorites
   useEffect(() => {
     async function getFavorites() {
       const response = await api.get('/favorites')

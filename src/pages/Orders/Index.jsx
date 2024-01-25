@@ -3,15 +3,16 @@ import { Container, Content, MobileWrapper, DesktopWrapper } from './styles'
 import { OrderContent } from '../../components/OrderContent'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
-import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import { api } from '../../services/api'
 import { TableRow } from '../../components/TableRow'
 
 export function Orders() {
+  // instance of auth hook
   const { user } = useAuth()
+
+  // state to control orders
   const [orders, setOrders] = useState([])
-  console.log(orders)
 
   // useEffect to load all orders
   useEffect(() => {

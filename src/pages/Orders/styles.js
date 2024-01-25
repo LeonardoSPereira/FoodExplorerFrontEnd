@@ -38,9 +38,9 @@ export const MobileWrapper = styled.div`
 `
 
 export const DesktopWrapper = styled.table`
+  display: none;
   width: 100%;
   border: 2px solid ${({ theme }) => theme.colors.dark_1000};
-  border-top-right-radius: 0.8rem;
   border-collapse: collapse;
 
   th {
@@ -49,7 +49,13 @@ export const DesktopWrapper = styled.table`
     line-height: 160%;
     text-align: left;
     padding: 1.6rem 2.4rem;
+    border-top-right-radius: 0.8rem;
     color: ${({ theme }) => theme.colors.light_300};
+    background-color: ${({ theme }) => theme.colors.dark_600};
     border: 2px solid ${({ theme }) => theme.colors.dark_1000};
+  }
+
+  @media (min-width: 768px) {
+    display: table;
   }
 `

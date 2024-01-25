@@ -1,5 +1,4 @@
 import { styled } from 'styled-components'
-import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   width: 100%;
@@ -17,14 +16,29 @@ export const Container = styled.div`
     font-weight: 400;
     line-height: 160%;
     color: ${({ theme }) => theme.colors.light_400};
+
+    span {
+      color: ${({ theme }) => theme.colors.light_300};
+    }
   }
 `
 
-export const Wrapper = styled(Link)`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 1rem;
+  gap: 0.4rem;
+  margin-bottom: 1.6rem;
+
+  > button {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: underline;
+    color: ${({ theme }) => theme.colors.cake_200};
+  }
 `
 
 export const StatusWrapper = styled.div`

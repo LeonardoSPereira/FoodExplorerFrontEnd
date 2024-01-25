@@ -20,7 +20,7 @@ import { BsCheck2 } from 'react-icons/bs'
 export function Select({ onChange, value, label, title, values }) {
   return (
     <Container>
-      <label htmlFor={label}>{label}</label>
+      {label && <label htmlFor={label}>{label}</label>}
 
       <SelectRoot value={value} onValueChange={onChange} required>
         <SelectTrigger id={label} aria-label={label}>

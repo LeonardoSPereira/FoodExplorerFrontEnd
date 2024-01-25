@@ -3,7 +3,6 @@ import { FaTimes } from 'react-icons/fa'
 import { api } from '../../services/api'
 
 export function OrderProduct({ product, isNew, onClick }) {
-  console.log('product: ', product)
   // create product image URL
   const productImageURL = `${api.defaults.baseURL}/files/${product.image}`
 
