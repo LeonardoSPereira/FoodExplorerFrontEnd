@@ -11,6 +11,18 @@ export function Home() {
   const [search, setSearch] = useState('')
   const [products, setProducts] = useState([])
 
+  const filteredFoodProducts = products.filter(
+    (product) => product.category === 'food',
+  )
+
+  const filteredDessertProducts = products.filter(
+    (product) => product.category === 'dessert',
+  )
+
+  const filteredDrinkProducts = products.filter(
+    (product) => product.category === 'drink',
+  )
+
   useEffect(() => {
     async function getProducts() {
       const response = await api.get(`/products?filter=${search}`)
@@ -34,41 +46,27 @@ export function Home() {
 
       {/* render the session only if there is any product with the following category. And for each product render the product component */}
       <Wrapper>
-        {products.filter((product) => product.category === 'food').length >
-          0 && (
-          <Session title="Refeições">
-            {products.map(
-              (product) =>
-                product.category === 'food' && (
-                  <Product key={product.id} product={product} />
-                ),
-            )}
-          </Session>
+        {filteredFoodProducts.length > 0 && (
+          <Session title="Refeições" products={filteredFoodProducts} />
         )}
 
-        {products.filter((product) => product.category === 'dessert').length >
-          0 && (
-          <Session title="Sobremesas">
-            {products.map(
-              (product) =>
-                product.category === 'dessert' && (
-                  <Product key={product.id} product={product} />
-                ),
-            )}
-          </Session>
+        {filteredDessertProducts.length > 0 && (
+          <Session title="Refeições" products={filteredDessertProducts} />
         )}
+
+        {filteredDrinkProducts.length > 0 && (
+          <Session title="Refeições" products={filteredDrinkProducts} />
+        )}
+
+        {/*
+        {products.filter((product) => product.category === 'food').length >
+          0 && <Session title="Refeições" products={products}></Session>}
+
+         {products.filter((product) => product.category === 'dessert').length >
+          0 && <Session title="Sobremesas" products={products}></Session>}
 
         {products.filter((product) => product.category === 'drink').length >
-          0 && (
-          <Session title="Bebidas">
-            {products.map(
-              (product) =>
-                product.category === 'drink' && (
-                  <Product key={product.id} product={product} />
-                ),
-            )}
-          </Session>
-        )}
+          0 && <Session title="Bebidas" products={products}></Session>} */}
       </Wrapper>
 
       <Footer />
