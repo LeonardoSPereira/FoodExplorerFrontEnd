@@ -14,5 +14,5 @@ export const EmblaContainer = styled.div`
   backface-visibility: hidden;
   display: flex;
   gap: 2.8rem;
-  touch-action: pan-y;
+  /* touch-action: pan-y; */
 `

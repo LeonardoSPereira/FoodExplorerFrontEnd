@@ -3,7 +3,14 @@ import { Product } from '../Product'
 import useEmblaCarousel from 'embla-carousel-react'
 import { Embla, EmblaContainer, EmblaViewport } from './styles'
 
-export function Carousel({ slides, options, products }) {
+export function Carousel({
+  slides,
+  options,
+  products,
+  addFavorite,
+  removeFavorite,
+  addProductToCart,
+}) {
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
 
   return (
@@ -12,7 +19,13 @@ export function Carousel({ slides, options, products }) {
         <EmblaContainer>
           {slides.map(() =>
             products.map((product) => (
-              <Product key={product.id} product={product} />
+              <Product
+                key={product.id}
+                product={product}
+                addFavorite={addFavorite}
+                removeFavorite={removeFavorite}
+                addProductToCart={addProductToCart}
+              />
             )),
           )}
         </EmblaContainer>

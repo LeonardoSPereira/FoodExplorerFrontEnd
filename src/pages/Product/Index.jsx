@@ -53,10 +53,11 @@ export function Product() {
     setOpenToast(false)
 
     const productToCart = {
-      id: product.id,
+      product_id: product.id,
+      image: product.image,
       title: product.title,
-      price: product.price_in_cents,
       quantity: stepperValue,
+      price_per_item: product.price_in_cents,
     }
 
     // add the product to cart

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from 'react'
 import { Container, StatusWrapper } from './styles'
-import { IoIosArrowForward } from 'react-icons/io'
+import { IoMdArrowForward } from 'react-icons/io'
 import { Select } from '../Select'
 import { Toast } from '../Toast'
 import { useNavigate } from 'react-router-dom'
@@ -130,7 +130,7 @@ export function TableRow({ order }) {
         <td>{renderFormattedDate(order.created_at)}</td>
         <td>
           <button onClick={() => navigate(`/order/${order.id}`)}>
-            Detalhes {<IoIosArrowForward />}
+            Detalhes {<IoMdArrowForward />}
           </button>
         </td>
       </Container>

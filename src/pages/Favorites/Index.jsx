@@ -54,19 +54,29 @@ export function Favorites() {
       <Container>
         <Header />
 
-        <Content>
-          <h1>Meus favoritos</h1>
-          <Wrapper>
-            {favorites &&
-              favorites.map((product) => (
-                <FavoriteProduct
-                  key={product.id}
-                  product={product}
-                  onClick={() => handleRemoveFavoriteProduct(product.id)}
-                />
-              ))}
-          </Wrapper>
-        </Content>
+        {favorites.length === 0 && (
+          <Content>
+            <h3>Você não possui favoritos</h3>
+            <p>Adicione favoritos clicando no coração, na página inicial</p>
+          </Content>
+        )}
+
+        {favorites.length !== 0 && (
+          <Content>
+            <h1>Meus favoritos</h1>
+            <Wrapper>
+              {favorites &&
+                favorites.map((product) => (
+                  <FavoriteProduct
+                    key={product.id}
+                    product={product}
+                    onClick={() => handleRemoveFavoriteProduct(product.id)}
+                  />
+                ))}
+            </Wrapper>
+          </Content>
+        )}
+
         <Footer />
       </Container>
     </>

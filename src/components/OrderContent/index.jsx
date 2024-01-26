@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from 'react'
 import { Container, Wrapper, StatusWrapper } from './styles'
-import { IoIosArrowForward } from 'react-icons/io'
+import { IoMdArrowForward } from 'react-icons/io'
 import { Select } from '../Select'
 import { Toast } from '../Toast'
 import { useNavigate } from 'react-router-dom'
@@ -100,7 +100,7 @@ export function OrderContent({ order, user }) {
             Pedido: <span>{renderOrderItems()}</span>
           </p>
           <button onClick={() => navigate(`/order/${order.id}`)}>
-            Detalhes {<IoIosArrowForward />}
+            Detalhes {<IoMdArrowForward />}
           </button>
         </Wrapper>
 

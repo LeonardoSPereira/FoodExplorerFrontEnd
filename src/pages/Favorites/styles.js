@@ -21,6 +21,20 @@ export const Content = styled.div`
     color: ${({ theme }) => theme.colors.light_300};
   }
 
+  > h3 {
+    font-size: 3.2rem;
+    font-weight: 500;
+    line-height: 140%;
+    color: ${({ theme }) => theme.colors.tomato_300};
+  }
+
+  > p {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 160%;
+    color: ${({ theme }) => theme.colors.light_300};
+  }
+
   @media (min-width: 768px) {
     margin: 3.6rem 12rem 0;
   }
