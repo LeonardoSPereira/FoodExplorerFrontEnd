@@ -36,8 +36,6 @@ export function Edit() {
   const [price, setPrice] = useState('')
   const [description, setDescription] = useState('')
 
-  const [deleteConfirmation, setDeleteConfirmation] = useState(false)
-
   // state to control the toast
   const [openToast, setOpenToast] = useState(false)
   const [toastTitle, setToastTitle] = useState('')
