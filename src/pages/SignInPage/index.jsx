@@ -8,15 +8,19 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 
 export function SignIn() {
+  // instance the auth hook
+  const { signIn } = useAuth()
+
+  // state to control the user data
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  // state to control the toast
   const [openToast, setOpenToast] = useState(false)
   const [toastTitle, setToastTitle] = useState('')
   const [toastDescription, setToastDescription] = useState('')
 
-  const { signIn } = useAuth()
-
+  // function to handle the sign in
   async function handleSignIn(e) {
     e.preventDefault()
     setOpenToast(false)
@@ -29,40 +33,44 @@ export function SignIn() {
   }
 
   return (
-    <Container>
-      <Logo />
-
-      <Form>
-        <h2>Faça login</h2>
-
-        <Input
-          label="Email"
-          placeholder="exemplo@exemplo.com.br"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <Input
-          label="Senha"
-          placeholder="No mínimo 6 caracteres"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <Button
-          title="Entrar"
-          disabled={email === '' || password === ''}
-          onClick={(e) => handleSignIn(e)}
-        />
-
-        <Link to="/register">Criar conta</Link>
-
+    <>
+      {openToast && (
         <Toast
           label="Realizar login"
           title={toastTitle}
           description={toastDescription}
           openToast={openToast}
         />
-      </Form>
-    </Container>
+      )}
+
+      <Container>
+        <Logo />
+
+        <Form>
+          <h2>Faça login</h2>
+
+          <Input
+            label="Email"
+            placeholder="exemplo@exemplo.com.br"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <Input
+            label="Senha"
+            placeholder="No mínimo 6 caracteres"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <Button
+            title="Entrar"
+            disabled={email === '' || password === ''}
+            onClick={(e) => handleSignIn(e)}
+          />
+
+          <Link to="/register">Criar conta</Link>
+        </Form>
+      </Container>
+    </>
   )
 }

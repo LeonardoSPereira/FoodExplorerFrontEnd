@@ -79,8 +79,10 @@ export function Edit() {
   }
 
   // function to handle the create product
-  async function handleUpdateProduct() {
+  async function handleUpdateProduct(e) {
     setOpenToast(false)
+    e.preventDefault()
+
     let response
 
     try {

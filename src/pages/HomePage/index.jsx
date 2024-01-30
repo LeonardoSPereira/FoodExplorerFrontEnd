@@ -9,8 +9,10 @@ import { useCart } from '../../hooks/cart'
 import { api } from '../../services/api'
 
 export function Home() {
+  // instance the cart hook
   const { addToCart } = useCart()
 
+  // state to control the search
   const [search, setSearch] = useState('')
   const [products, setProducts] = useState([])
 
@@ -19,6 +21,7 @@ export function Home() {
   const [toastTitle, setToastTitle] = useState('')
   const [toastDescription, setToastDescription] = useState('')
 
+  // filter the products by category
   const filteredFoodProducts = products.filter(
     (product) => product.category === 'food',
   )
@@ -31,7 +34,7 @@ export function Home() {
     (product) => product.category === 'drink',
   )
 
-  // function to add the product to favorites and show the toast
+  // function to add the product to favorites
   async function handleAddFavorite(product) {
     setOpenToast(false)
 
@@ -51,7 +54,7 @@ export function Home() {
     }
   }
 
-  // function to remove the product from favorites and show the toast
+  // function to remove the product from favorites
   async function handleRemoveFavorite(product) {
     setOpenToast(false)
 
@@ -71,7 +74,7 @@ export function Home() {
     }
   }
 
-  // function to add the product to cart and show the toast
+  // function to add the product to cart
   function handleAddProductToCart(product, stepperValue) {
     setOpenToast(false)
 
@@ -91,6 +94,7 @@ export function Home() {
     setOpenToast(true)
   }
 
+  // useEffect to get the products
   useEffect(() => {
     async function getProducts() {
       const response = await api.get(`/products?filter=${search}`)

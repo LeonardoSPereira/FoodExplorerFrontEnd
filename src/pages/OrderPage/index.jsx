@@ -21,7 +21,6 @@ export function Order() {
 
   // initializing order state
   const [orderItems, setOrderItems] = useState([])
-  console.log('order', orderItems)
 
   // state to control the toast
   const [openToast, setOpenToast] = useState(false)

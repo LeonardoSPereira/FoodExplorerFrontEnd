@@ -15,7 +15,7 @@ export function Favorites() {
   const [toastTitle, setToastTitle] = useState('')
   const [toastDescription, setToastDescription] = useState('')
 
-  // handle remove favorite product
+  // function to remove favorite product
   async function handleRemoveFavoriteProduct(id) {
     setOpenToast(false)
 

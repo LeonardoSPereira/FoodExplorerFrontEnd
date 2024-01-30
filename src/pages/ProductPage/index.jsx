@@ -22,9 +22,13 @@ import { useAuth } from '../../hooks/auth'
 import { useCart } from '../../hooks/cart'
 
 export function Product() {
+  // initialize the hooks
   const { user } = useAuth()
   const { addToCart } = useCart()
+
+  // get the product id from the url
   const { id } = useParams()
+  // instance the navigate hook
   const navigate = useNavigate()
 
   // state to control the product
