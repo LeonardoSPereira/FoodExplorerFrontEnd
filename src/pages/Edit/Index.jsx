@@ -80,7 +80,6 @@ export function Edit() {
 
   // function to handle the create product
   async function handleUpdateProduct(e) {
-    e.preventDefault()
     setOpenToast(false)
     let response
 
@@ -96,7 +95,6 @@ export function Edit() {
 
       // If selectedFile exists, update the image
       if (selectedFile !== null) {
-        console.log('selectedFile exists')
         const fileUploadForm = new FormData()
         fileUploadForm.append('image', selectedFile)
 
@@ -133,9 +131,9 @@ export function Edit() {
     }
   }
 
+  // function to handle the delete product
   async function handleDeleteProduct() {
     setOpenToast(false)
-    // e.preventDefault()
 
     try {
       const response = await api.delete(`/products/${id}`)
@@ -153,6 +151,7 @@ export function Edit() {
     }
   }
 
+  // useEffect to get the product info
   useEffect(() => {
     async function getProduct() {
       try {
@@ -172,6 +171,7 @@ export function Edit() {
     getProduct()
   }, [id])
 
+  // useEffect to format the price
   useEffect(() => {
     setPrice(formatPrice(rawPrice))
   }, [price, rawPrice])
