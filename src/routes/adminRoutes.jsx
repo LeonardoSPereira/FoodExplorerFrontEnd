@@ -1,13 +1,13 @@
 import { Routes, Route } from 'react-router-dom'
 
-import { Favorites } from '../pages/FavoritesPage'
-import { NotFound } from '../pages/NotFoundPage'
-import { Product } from '../pages/ProductPage'
-import { Orders } from '../pages/OrdersPage'
-import { Order } from '../pages/OrderPage'
-import { Home } from '../pages/HomePage'
-import { Edit } from '../pages/EditPage'
-import { New } from '../pages/NewPage'
+import { Favorites } from '../pages/Favorites'
+import { NotFound } from '../pages/NotFound'
+import { Product } from '../pages/Product'
+import { Orders } from '../pages/Orders'
+import { Order } from '../pages/Order'
+import { Home } from '../pages/Home'
+import { Edit } from '../pages/Edit'
+import { New } from '../pages/New'
 
 // create the admin routes
 export function AdminRoutes() {
