@@ -1,8 +1,8 @@
 import { BrowserRouter } from 'react-router-dom'
 import { useAuth } from '../hooks/auth'
-import { AuthRoutes } from './auth.routes'
-import { AdminRoutes } from './admin.routes'
-import { CustomerRoutes } from './customer.routes'
+import { AuthRoutes } from './authRoutes'
+import { AdminRoutes } from './adminRoutes'
+import { CustomerRoutes } from './customerRoutes'
 
 export function Routes() {
   // get the user from the auth context
