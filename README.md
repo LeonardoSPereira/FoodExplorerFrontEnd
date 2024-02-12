@@ -42,7 +42,7 @@ Essas instruções vão te permitir obter uma cópia do projeto e rodar a aplica
 
 ### Pre-requisitos
 Para rodar a aplicação, você precisa ter o projeto do back-end rodando localmente. Para isso, siga as instruções [aqui](https://github.com/LeonardoSPereira/FoodExplorerBackEnd).<br>
-Além disso, você precisará de um editor de código, como o VSCode, um terminal e um aplicativo para testar as rotas da API, como o Insomnia ou Postman.
+Além disso, você precisará do Node.js instalado na sua máquina. Você pode baixá-lo [aqui](https://nodejs.org/).
 
 ### Instalação
 Para acessar o projeto, basta clonar o repositório ou realizar o download dos arquivos do projeto.<br>
@@ -147,7 +147,7 @@ These instructions will allow you to get a copy of the project and run the appli
 
 ### Prerequisites
 To run the application, you need to have the backend project running locally. Follow the instructions [here](https://github.com/LeonardoSPereira/FoodExplorerBackEnd).<br>
-Additionally, you will need a code editor like VSCode, a terminal, and an application to test API routes, such as Insomnia or Postman.
+In addition, you will need Node.js installed on your machine. You can download it [here](https://nodejs.org/).
 
 ### Installation
 To access the project, either clone the repository or download the project files.<br>
